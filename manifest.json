@@ -1,0 +1,9 @@
+{
+  "short_name": "Khentii Museum",
+  "name": "Хэнтий аймгийн музей",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#171615",
+  "background_color": "#fffaf0"
+}
