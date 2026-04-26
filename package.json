@@ -1,0 +1,21 @@
+{
+  "name": "khentii-museum-app",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "firebase": "^12.12.1",
+    "lucide-react": "^1.11.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "scripts": {
+    "start": "vite --host 0.0.0.0",
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.10"
+  }
+}
