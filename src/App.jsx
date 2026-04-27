@@ -1,8 +1,8 @@
 import "./App.css";
 import { useEffect, useId, useMemo, useState } from "react";
 import { db, auth } from "./firebase";
-import { createQPayInvoice } from "./src/services/qpayService.js";
-import { qrSvgDataUrl } from "./utils/qrCode.js";
+import { createQPayInvoice } from "./services/qpayService.js";
+import { qrSvgDataUrl } from "../utils/qrCode.js";
 
 import { onValue, ref, set } from "firebase/database";
 
@@ -176,8 +176,7 @@ const defaultData = {
       image: museumImages.gallery,
       images: [museumImages.gallery],
       video: "",
-      body:
-        "Эрхэм зочид, судлаачид, хүүхэд залуучууд та бүхнийг Хэнтий аймгийн музейн цахим орчинд тавтай морилно уу. Манай музей Хэнтий нутгийн түүх, археологи, угсаатны зүй, байгалийн болон соёлын өвийг хадгалж хамгаалах, судлах, олон нийтэд хүртээмжтэйгээр таниулах эрхэм зорилготой. Бид уламжлалт үзэсгэлэнгээ орчин үеийн дижитал үйлчилгээ, боловсролын хөтөлбөр, VR/AR үзмэртэй хослуулан музейн шинэ туршлагыг бүрдүүлж байна.",
+      body: "Эрхэм зочид, судлаачид, хүүхэд залуучууд та бүхнийг Хэнтий аймгийн музейн цахим орчинд тавтай морилно уу. Манай музей Хэнтий нутгийн түүх, археологи, угсаатны зүй, байгалийн болон соёлын өвийг хадгалж хамгаалах, судлах, олон нийтэд хүртээмжтэйгээр таниулах эрхэм зорилготой. Бид уламжлалт үзэсгэлэнгээ орчин үеийн дижитал үйлчилгээ, боловсролын хөтөлбөр, VR/AR үзмэртэй хослуулан музейн шинэ туршлагыг бүрдүүлж байна.",
     },
     structure: {
       title: "МУЗЕЙН БҮТЭЦ",
@@ -186,8 +185,7 @@ const defaultData = {
       sortOrder: 2,
       images: [museumImages.halls],
       video: "",
-      body:
-        "Хэнтий аймгийн музей нь сан хөмрөг, судалгаа шинжилгээ, үзэсгэлэн, боловсрол, олон нийттэй харилцах, дижитал контент, захиргаа аж ахуйн чиг үүргийг уялдуулан ажилладаг. Бүтцийн нэгж бүр музейн сан хөмрөгийг хамгаалах, үзэгчдэд чанартай үйлчилгээ үзүүлэх, орон нутгийн соёлын өвийг олон нийтэд тогтвортой хүргэх зорилгоор хамтран ажиллана.",
+      body: "Хэнтий аймгийн музей нь сан хөмрөг, судалгаа шинжилгээ, үзэсгэлэн, боловсрол, олон нийттэй харилцах, дижитал контент, захиргаа аж ахуйн чиг үүргийг уялдуулан ажилладаг. Бүтцийн нэгж бүр музейн сан хөмрөгийг хамгаалах, үзэгчдэд чанартай үйлчилгээ үзүүлэх, орон нутгийн соёлын өвийг олон нийтэд тогтвортой хүргэх зорилгоор хамтран ажиллана.",
     },
     organization: {
       title: "Зохион байгуулалт",
@@ -213,8 +211,7 @@ const defaultData = {
       sortOrder: 4,
       images: [museumImages.vr],
       video: "",
-      body:
-        "Хэнтий аймгийн музей нь нутгийн түүх, соёлын өвийг үе үеийн судлаач, музейн ажилтнуудын хөдөлмөрөөр бүрдүүлж, өнөөдөр олон нийт, сургууль, судлаачдад нээлттэй соёл боловсролын төв болон хөгжиж байна.",
+      body: "Хэнтий аймгийн музей нь нутгийн түүх, соёлын өвийг үе үеийн судлаач, музейн ажилтнуудын хөдөлмөрөөр бүрдүүлж, өнөөдөр олон нийт, сургууль, судлаачдад нээлттэй соёл боловсролын төв болон хөгжиж байна.",
     },
   },
   timelineSlides: [
@@ -222,29 +219,25 @@ const defaultData = {
       year: "1949",
       title: "Музейн эхлэл",
       image: museumImages.halls,
-      desc:
-        "Хэнтий нутагт музейн сан хөмрөг бүрдүүлэх, түүх соёлын дурсгалыг цуглуулах анхны ажлууд эхэлсэн үе.",
+      desc: "Хэнтий нутагт музейн сан хөмрөг бүрдүүлэх, түүх соёлын дурсгалыг цуглуулах анхны ажлууд эхэлсэн үе.",
     },
     {
       year: "1970-аад он",
       title: "Сан хөмрөгийн баяжилт",
       image: museumImages.artifact,
-      desc:
-        "Археологи, угсаатны зүй, түүхийн баримт, ахуйн эд өлгийн зүйлсээр сан хөмрөг тогтвортой нэмэгдэж, үзэсгэлэнгийн чиглэлүүд өргөжсөн.",
+      desc: "Археологи, угсаатны зүй, түүхийн баримт, ахуйн эд өлгийн зүйлсээр сан хөмрөг тогтвортой нэмэгдэж, үзэсгэлэнгийн чиглэлүүд өргөжсөн.",
     },
     {
       year: "1990-ээд он",
       title: "Олон нийтэд чиглэсэн музей",
       image: museumImages.gallery,
-      desc:
-        "Сургалт, тайлбар, судалгааны ажлыг орон нутгийн иргэд, сурагч, судлаачдад илүү хүртээмжтэй болгох шинэ хэлбэрүүд нэвтэрсэн.",
+      desc: "Сургалт, тайлбар, судалгааны ажлыг орон нутгийн иргэд, сурагч, судлаачдад илүү хүртээмжтэй болгох шинэ хэлбэрүүд нэвтэрсэн.",
     },
     {
       year: "Өнөөдөр",
       title: "Цахим музейн шинэ шат",
       image: museumImages.vr,
-      desc:
-        "Үзэсгэлэн, боловсролын хөтөлбөр, цахим тасалбар, VR/AR үзмэр, медиа санг нэгтгэсэн ухаалаг музейн платформ болон хөгжиж байна.",
+      desc: "Үзэсгэлэн, боловсролын хөтөлбөр, цахим тасалбар, VR/AR үзмэр, медиа санг нэгтгэсэн ухаалаг музейн платформ болон хөгжиж байна.",
     },
   ],
   publications: [
@@ -307,9 +300,24 @@ const defaultData = {
     mode: "demo",
     currency: "MNT",
     ticketTypes: [
-      { id: "adult", name: "Том хүн", price: 10000, description: "Музейн үндсэн үзлэг" },
-      { id: "student", name: "Оюутан / сурагч", price: 5000, description: "Сургуулийн насны болон оюутан" },
-      { id: "family", name: "Гэр бүл", price: 25000, description: "4 хүртэл хүний багц" },
+      {
+        id: "adult",
+        name: "Том хүн",
+        price: 10000,
+        description: "Музейн үндсэн үзлэг",
+      },
+      {
+        id: "student",
+        name: "Оюутан / сурагч",
+        price: 5000,
+        description: "Сургуулийн насны болон оюутан",
+      },
+      {
+        id: "family",
+        name: "Гэр бүл",
+        price: 25000,
+        description: "4 хүртэл хүний багц",
+      },
     ],
   },
   notifications: [],
@@ -547,7 +555,9 @@ function fallbackExhibitId(floorIndex, hallIndex, exhibitIndex, exhibit = {}) {
     textValue(exhibit.period),
     textValue(exhibit.foundPlace),
   ].join("|");
-  return `legacy-exhibit-${floorIndex + 1}-${hallIndex + 1}-${stableHash(seed)}`;
+  return `legacy-exhibit-${floorIndex + 1}-${hallIndex + 1}-${stableHash(
+    seed
+  )}`;
 }
 
 async function downloadQrCode(url, title) {
@@ -575,7 +585,9 @@ function printQrCode(url, title) {
   if (!printWindow) return;
   const doc = printWindow.document;
   doc.open();
-  doc.write("<!doctype html><html><head><title>QR</title></head><body></body></html>");
+  doc.write(
+    "<!doctype html><html><head><title>QR</title></head><body></body></html>"
+  );
   doc.close();
 
   const style = doc.createElement("style");
@@ -647,12 +659,16 @@ function exportOrdersCsv(orders) {
     order.date,
     order.createdAt,
   ]);
-  const csv = [header, ...rows].map((row) => row.map(csvEscape).join(",")).join("\n");
+  const csv = [header, ...rows]
+    .map((row) => row.map(csvEscape).join(","))
+    .join("\n");
   const blob = new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
   anchor.href = url;
-  anchor.download = `ticket-orders-${new Date().toISOString().slice(0, 10)}.csv`;
+  anchor.download = `ticket-orders-${new Date()
+    .toISOString()
+    .slice(0, 10)}.csv`;
   anchor.click();
   URL.revokeObjectURL(url);
 }
@@ -699,17 +715,25 @@ function requestFullscreen(elementId) {
 async function activateModelAr(elementId) {
   const element = document.getElementById(elementId);
   const viewer = element?.querySelector("model-viewer");
-  if (viewer?.activateAR) {
+
+  if (!viewer) {
+    alert("3D model viewer олдсонгүй.");
+    return;
+  }
+
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isMobile && viewer.activateAR) {
     try {
       await viewer.activateAR();
       return;
     } catch (error) {
-      console.error("AR view fallback:", error);
+      console.warn("AR not available:", error);
     }
   }
+
   requestFullscreen(elementId);
 }
-
 function upsertMeta(selector, attributes) {
   let element = document.head.querySelector(selector);
   if (!element) {
@@ -722,7 +746,10 @@ function upsertMeta(selector, attributes) {
 }
 
 function normalizeTicket(request = {}) {
-  const ticketType = textValue(request.ticketType, textValue(request.type, "Том хүн"));
+  const ticketType = textValue(
+    request.ticketType,
+    textValue(request.type, "Том хүн")
+  );
   const quantity = Math.max(1, Number(request.quantity || request.guests || 1));
   const unitPrice = Number(request.unitPrice || request.price || 0);
   const totalAmount = Number(request.totalAmount || unitPrice * quantity || 0);
@@ -742,7 +769,10 @@ function normalizeTicket(request = {}) {
     currency: textValue(request.currency, "MNT"),
     note: textValue(request.note),
     status: textValue(request.status, "pending"),
-    paymentStatus: textValue(request.paymentStatus, textValue(request.status, "pending")),
+    paymentStatus: textValue(
+      request.paymentStatus,
+      textValue(request.status, "pending")
+    ),
     paymentMode: textValue(request.paymentMode, "demo"),
     invoiceId: textValue(request.invoiceId),
     paymentUrl: textValue(request.paymentUrl),
@@ -756,7 +786,10 @@ function normalizeTicket(request = {}) {
 
 function normalizeTicketType(item = {}) {
   return {
-    id: textValue(item.id, `ticket-${stableHash(item.name || item.title || "ticket")}`),
+    id: textValue(
+      item.id,
+      `ticket-${stableHash(item.name || item.title || "ticket")}`
+    ),
     name: textValue(item.name || item.title, "Тасалбар"),
     price: Number(item.price || 0),
     description: textValue(item.description || item.desc),
@@ -778,7 +811,12 @@ function normalizePaymentSettings(settings = {}) {
 
 function normalizeNotification(item = {}) {
   return {
-    id: textValue(item.id, `notification-${stableHash(`${item.orderId || ""}-${item.createdAt || ""}`)}`),
+    id: textValue(
+      item.id,
+      `notification-${stableHash(
+        `${item.orderId || ""}-${item.createdAt || ""}`
+      )}`
+    ),
     type: textValue(item.type, "ticket"),
     title: textValue(item.title, "New ticket request"),
     orderId: textValue(item.orderId),
@@ -829,7 +867,10 @@ function mergeDemoArVrItems(items = []) {
 function normalizeSeo(seo = {}) {
   const legacyTitle = "Хэнтий музей | Virtual Museum";
   const title = textValue(seo.title, defaultData.seo.title);
-  const ogTitle = textValue(seo.ogTitle, textValue(seo.title, defaultData.seo.ogTitle));
+  const ogTitle = textValue(
+    seo.ogTitle,
+    textValue(seo.title, defaultData.seo.ogTitle)
+  );
   return {
     title: title === legacyTitle ? defaultData.seo.title : title,
     description: textValue(seo.description, defaultData.seo.description),
@@ -849,7 +890,10 @@ function normalizeAboutPages(aboutPages = {}) {
     greeting: {
       ...defaultData.aboutPages.greeting,
       ...(source.greeting || {}),
-      title: textValue(source.greeting?.title, defaultData.aboutPages.greeting.title),
+      title: textValue(
+        source.greeting?.title,
+        defaultData.aboutPages.greeting.title
+      ),
       subtitle: textValue(
         source.greeting?.subtitle,
         defaultData.aboutPages.greeting.subtitle
@@ -858,21 +902,39 @@ function normalizeAboutPages(aboutPages = {}) {
         typeof source.greeting?.published === "boolean"
           ? source.greeting.published
           : defaultData.aboutPages.greeting.published,
-      sortOrder: Number(source.greeting?.sortOrder || defaultData.aboutPages.greeting.sortOrder),
+      sortOrder: Number(
+        source.greeting?.sortOrder || defaultData.aboutPages.greeting.sortOrder
+      ),
       directorName: textValue(
         source.greeting?.directorName,
         defaultData.aboutPages.greeting.directorName
       ),
-      role: textValue(source.greeting?.role, defaultData.aboutPages.greeting.role),
-      image: textValue(source.greeting?.image, defaultData.aboutPages.greeting.image),
-      images: mediaList(source.greeting?.images?.length ? source.greeting.images : defaultData.aboutPages.greeting.images),
+      role: textValue(
+        source.greeting?.role,
+        defaultData.aboutPages.greeting.role
+      ),
+      image: textValue(
+        source.greeting?.image,
+        defaultData.aboutPages.greeting.image
+      ),
+      images: mediaList(
+        source.greeting?.images?.length
+          ? source.greeting.images
+          : defaultData.aboutPages.greeting.images
+      ),
       video: textValue(source.greeting?.video),
-      body: textValue(source.greeting?.body, defaultData.aboutPages.greeting.body),
+      body: textValue(
+        source.greeting?.body,
+        defaultData.aboutPages.greeting.body
+      ),
     },
     structure: {
       ...defaultData.aboutPages.structure,
       ...(source.structure || {}),
-      title: textValue(source.structure?.title, defaultData.aboutPages.structure.title),
+      title: textValue(
+        source.structure?.title,
+        defaultData.aboutPages.structure.title
+      ),
       subtitle: textValue(
         source.structure?.subtitle,
         defaultData.aboutPages.structure.subtitle
@@ -881,10 +943,20 @@ function normalizeAboutPages(aboutPages = {}) {
         typeof source.structure?.published === "boolean"
           ? source.structure.published
           : defaultData.aboutPages.structure.published,
-      sortOrder: Number(source.structure?.sortOrder || defaultData.aboutPages.structure.sortOrder),
-      images: mediaList(source.structure?.images?.length ? source.structure.images : defaultData.aboutPages.structure.images),
+      sortOrder: Number(
+        source.structure?.sortOrder ||
+          defaultData.aboutPages.structure.sortOrder
+      ),
+      images: mediaList(
+        source.structure?.images?.length
+          ? source.structure.images
+          : defaultData.aboutPages.structure.images
+      ),
       video: textValue(source.structure?.video),
-      body: textValue(source.structure?.body, defaultData.aboutPages.structure.body),
+      body: textValue(
+        source.structure?.body,
+        defaultData.aboutPages.structure.body
+      ),
     },
     organization: {
       ...defaultData.aboutPages.organization,
@@ -902,7 +974,8 @@ function normalizeAboutPages(aboutPages = {}) {
           ? source.organization.published
           : defaultData.aboutPages.organization.published,
       sortOrder: Number(
-        source.organization?.sortOrder || defaultData.aboutPages.organization.sortOrder
+        source.organization?.sortOrder ||
+          defaultData.aboutPages.organization.sortOrder
       ),
       images: mediaList(
         source.organization?.images?.length
@@ -924,13 +997,22 @@ function normalizeAboutPages(aboutPages = {}) {
       ...defaultData.aboutPages.intro,
       ...(source.intro || {}),
       title: textValue(source.intro?.title, defaultData.aboutPages.intro.title),
-      subtitle: textValue(source.intro?.subtitle, defaultData.aboutPages.intro.subtitle),
+      subtitle: textValue(
+        source.intro?.subtitle,
+        defaultData.aboutPages.intro.subtitle
+      ),
       published:
         typeof source.intro?.published === "boolean"
           ? source.intro.published
           : defaultData.aboutPages.intro.published,
-      sortOrder: Number(source.intro?.sortOrder || defaultData.aboutPages.intro.sortOrder),
-      images: mediaList(source.intro?.images?.length ? source.intro.images : defaultData.aboutPages.intro.images),
+      sortOrder: Number(
+        source.intro?.sortOrder || defaultData.aboutPages.intro.sortOrder
+      ),
+      images: mediaList(
+        source.intro?.images?.length
+          ? source.intro.images
+          : defaultData.aboutPages.intro.images
+      ),
       video: textValue(source.intro?.video),
       body: textValue(source.intro?.body, defaultData.aboutPages.intro.body),
     },
@@ -939,7 +1021,10 @@ function normalizeAboutPages(aboutPages = {}) {
 
 function normalizeTimelineSlide(item = {}) {
   return {
-    id: textValue(item.id, `timeline-${stableHash(`${item.year || ""}-${item.title || ""}`)}`),
+    id: textValue(
+      item.id,
+      `timeline-${stableHash(`${item.year || ""}-${item.title || ""}`)}`
+    ),
     year: textValue(item.year, "Он цаг"),
     title: textValue(item.title, "Түүхэн үе"),
     image: textValue(item.image, museumImages.halls),
@@ -949,7 +1034,12 @@ function normalizeTimelineSlide(item = {}) {
 
 function normalizePublication(item = {}) {
   return {
-    id: textValue(item.id, `publication-${stableHash(`${item.title || ""}-${item.year || item.date || ""}`)}`),
+    id: textValue(
+      item.id,
+      `publication-${stableHash(
+        `${item.title || ""}-${item.year || item.date || ""}`
+      )}`
+    ),
     title: textValue(item.title, "Гарчиг"),
     year: textValue(item.year, textValue(item.date)),
     date: textValue(item.date, textValue(item.year)),
@@ -958,7 +1048,9 @@ function normalizePublication(item = {}) {
     coverImage: textValue(item.coverImage || item.image, museumImages.gallery),
     desc: textValue(item.desc, textValue(item.fullDesc)),
     fullDesc: textValue(item.fullDesc, textValue(item.desc)),
-    files: safeArray(item.files?.length ? item.files : item.attachments).map(normalizeFileItem),
+    files: safeArray(item.files?.length ? item.files : item.attachments).map(
+      normalizeFileItem
+    ),
     published: typeof item.published === "boolean" ? item.published : true,
     sortOrder: Number(item.sortOrder || 0),
   };
@@ -971,7 +1063,10 @@ function normalizeTransparency(item = {}) {
     files.unshift(normalizeFileItem({ title: item.title, url: primaryFile }));
   }
   return {
-    id: textValue(item.id, `transparency-${stableHash(`${item.title || ""}-${item.date || ""}`)}`),
+    id: textValue(
+      item.id,
+      `transparency-${stableHash(`${item.title || ""}-${item.date || ""}`)}`
+    ),
     title: textValue(item.title, "Ил тод мэдээлэл"),
     date: textValue(item.date, new Date().toISOString().slice(0, 10)),
     category: textValue(item.category, "Мэдээлэл"),
@@ -998,7 +1093,9 @@ function normalizeFloor(floor = {}, floorIndex = 0) {
       images: mediaList(hall?.images),
       sidePhotos: mediaList(hall?.sidePhotos),
       videos: mediaList(hall?.videos),
-      audios: mediaList(hall?.audios).concat(textValue(hall?.audio) ? [textValue(hall.audio)] : []),
+      audios: mediaList(hall?.audios).concat(
+        textValue(hall?.audio) ? [textValue(hall.audio)] : []
+      ),
       documents: mediaList(hall?.documents),
       exhibits: safeArray(hall?.exhibits).map((exhibit, exhibitIndex) => ({
         id: textValue(
@@ -1042,7 +1139,10 @@ function safeData(saved) {
     heroTitle: textValue(source.heroTitle, defaultData.heroTitle),
     heroText: textValue(source.heroText, defaultData.heroText),
     heroImage: textValue(source.heroImage, defaultData.heroImage),
-    hallsHeroImage: textValue(source.hallsHeroImage, defaultData.hallsHeroImage),
+    hallsHeroImage: textValue(
+      source.hallsHeroImage,
+      defaultData.hallsHeroImage
+    ),
     educationHeroImage: textValue(
       source.educationHeroImage,
       defaultData.educationHeroImage
@@ -1285,7 +1385,9 @@ export default function App() {
     setSaving(true);
     try {
       await set(ref(db, "museumData"), fixed);
-      setDbStatus("Өөрчлөлт Firebase database болон local fallback руу хадгалагдлаа.");
+      setDbStatus(
+        "Өөрчлөлт Firebase database болон local fallback руу хадгалагдлаа."
+      );
       setDbError("");
       return { ok: true, data: fixed };
     } catch (error) {
@@ -1339,9 +1441,19 @@ export default function App() {
     return uploaded;
   };
 
-  const updateField = (field, value) => saveData({ ...data, [field]: value });
-  const updateNested = (parent, field, value) =>
-    saveData({ ...data, [parent]: { ...data[parent], [field]: value } });
+  const updateField = (field, value) => {
+    setData({ ...data, [field]: value });
+  };
+
+  const updateNested = (parent, field, value) => {
+    setData({
+      ...data,
+      [parent]: {
+        ...data[parent],
+        [field]: value,
+      },
+    });
+  };
 
   const loginWithRole = async (role) => {
     try {
@@ -1353,7 +1465,9 @@ export default function App() {
       navigate(role === "admin" ? "/admin" : "/");
     } catch (error) {
       console.error(error);
-      setDbError("Нэвтрэх мэдээлэл буруу эсвэл Firebase Auth тохиргоо идэвхгүй байна.");
+      setDbError(
+        "Нэвтрэх мэдээлэл буруу эсвэл Firebase Auth тохиргоо идэвхгүй байна."
+      );
     }
   };
 
@@ -1410,7 +1524,11 @@ export default function App() {
       const exhibitId = decodeURIComponent(floorSlug || "");
       for (let fIndex = 0; fIndex < data.floors.length; fIndex += 1) {
         const floor = data.floors[fIndex];
-        for (let hIndex = 0; hIndex < safeArray(floor?.halls).length; hIndex += 1) {
+        for (
+          let hIndex = 0;
+          hIndex < safeArray(floor?.halls).length;
+          hIndex += 1
+        ) {
           const hall = floor.halls[hIndex];
           const eIndex = safeArray(hall?.exhibits).findIndex(
             (item) => textValue(item?.id) === exhibitId
@@ -1453,7 +1571,7 @@ export default function App() {
   }, [data.publications, floorSlug, isPublicationDetailPage, routeTick]);
 
   const addFloor = () =>
-    saveData({
+    setData({
       ...data,
       floors: [
         ...data.floors,
@@ -1472,12 +1590,12 @@ export default function App() {
     const floors = data.floors.map((floor, index) =>
       index === floorIndex ? { ...floor, [field]: value } : floor
     );
-    saveData({ ...data, floors });
+    setData({ ...data, floors });
   };
 
   const deleteFloor = (floorIndex) => {
     if (!window.confirm("Энэ давхрыг устгах уу?")) return;
-    saveData({
+    setData({
       ...data,
       floors: data.floors.filter((_, index) => index !== floorIndex),
     });
@@ -1502,7 +1620,7 @@ export default function App() {
           }
         : floor
     );
-    saveData({ ...data, floors });
+    setData({ ...data, floors });
   };
 
   const updateHall = (floorIndex, hallIndex, field, value) => {
@@ -1516,7 +1634,7 @@ export default function App() {
             ),
           }
     );
-    saveData({ ...data, floors });
+    setData({ ...data, floors });
   };
 
   const deleteHall = (floorIndex, hallIndex) => {
@@ -1531,7 +1649,7 @@ export default function App() {
             ),
           }
     );
-    saveData({ ...data, floors });
+    setData({ ...data, floors });
   };
 
   const addExhibit = (floorIndex, hallIndex) => {
@@ -1563,7 +1681,7 @@ export default function App() {
             ),
           }
     );
-    saveData({ ...data, floors });
+    setData({ ...data, floors });
   };
 
   const updateExhibit = (floorIndex, hallIndex, exhibitIndex, field, value) => {
@@ -1586,7 +1704,7 @@ export default function App() {
             ),
           }
     );
-    saveData({ ...data, floors });
+    setData({ ...data, floors });
   };
 
   const deleteExhibit = (floorIndex, hallIndex, exhibitIndex) => {
@@ -1608,22 +1726,20 @@ export default function App() {
             ),
           }
     );
-    saveData({ ...data, floors });
+    setData({ ...data, floors });
   };
 
   const addItem = (key, item) =>
-    saveData({ ...data, [key]: [item, ...safeArray(data[key])] });
-
+    setData({ ...data, [key]: [item, ...safeArray(data[key])] });
   const updateItem = (key, index, field, value) =>
-    saveData({
+    setData({
       ...data,
       [key]: safeArray(data[key]).map((item, itemIndex) =>
         itemIndex === index ? { ...item, [field]: value } : item
       ),
     });
-
   const deleteItem = (key, index) =>
-    saveData({
+    setData({
       ...data,
       [key]: safeArray(data[key]).filter((_, itemIndex) => itemIndex !== index),
     });
@@ -1636,7 +1752,13 @@ export default function App() {
     ]);
   };
 
-  const appendExhibitMedia = (floorIndex, hallIndex, exhibitIndex, field, urls) => {
+  const appendExhibitMedia = (
+    floorIndex,
+    hallIndex,
+    exhibitIndex,
+    field,
+    urls
+  ) => {
     const exhibit =
       data.floors[floorIndex]?.halls?.[hallIndex]?.exhibits?.[exhibitIndex];
     updateExhibit(floorIndex, hallIndex, exhibitIndex, field, [
@@ -1680,7 +1802,8 @@ export default function App() {
     type
   ) => {
     const urls = await uploadMany(files, type);
-    if (urls.length) appendExhibitMedia(floorIndex, hallIndex, exhibitIndex, field, urls);
+    if (urls.length)
+      appendExhibitMedia(floorIndex, hallIndex, exhibitIndex, field, urls);
   };
 
   const deleteMedia = (scope, indexes, field, mediaIndex) => {
@@ -1759,7 +1882,7 @@ export default function App() {
   };
 
   const updateAboutPage = (section, field, value) =>
-    saveData({
+    setData({
       ...data,
       aboutPages: {
         ...data.aboutPages,
@@ -1774,7 +1897,10 @@ export default function App() {
     const urls = await uploadMany(files, "image");
     if (!urls.length) return;
     const pageData = data.aboutPages[section] || {};
-    updateAboutPage(section, "images", [...safeArray(pageData.images), ...urls]);
+    updateAboutPage(section, "images", [
+      ...safeArray(pageData.images),
+      ...urls,
+    ]);
   };
 
   const uploadAboutVideo = async (section, file) => {
@@ -1822,10 +1948,17 @@ export default function App() {
   };
 
   const addTicketRequest = async (request) => {
-    const ticketType = safeArray(data.paymentSettings.ticketTypes).find(
-      (item) => item.id === request.ticketTypeId || item.name === request.ticketType
-    ) || safeArray(data.paymentSettings.ticketTypes)[0] || normalizeTicketType({});
-    const quantity = Math.max(1, Number(request.quantity || request.guests || 1));
+    const ticketType =
+      safeArray(data.paymentSettings.ticketTypes).find(
+        (item) =>
+          item.id === request.ticketTypeId || item.name === request.ticketType
+      ) ||
+      safeArray(data.paymentSettings.ticketTypes)[0] ||
+      normalizeTicketType({});
+    const quantity = Math.max(
+      1,
+      Number(request.quantity || request.guests || 1)
+    );
     const unitPrice = Number(ticketType.price || request.unitPrice || 0);
     const totalAmount = unitPrice * quantity;
     const createdAt = new Date().toISOString();
@@ -1912,13 +2045,15 @@ export default function App() {
     const updatedTickets = safeArray(data.ticketRequests).map((order) =>
       order.id === orderId ? normalizeTicket({ ...order, ...changes }) : order
     );
-    const updatedNotifications = safeArray(data.notifications).map((notification) =>
-      notification.orderId === orderId
-        ? normalizeNotification({
-            ...notification,
-            paymentStatus: changes.paymentStatus || notification.paymentStatus,
-          })
-        : notification
+    const updatedNotifications = safeArray(data.notifications).map(
+      (notification) =>
+        notification.orderId === orderId
+          ? normalizeNotification({
+              ...notification,
+              paymentStatus:
+                changes.paymentStatus || notification.paymentStatus,
+            })
+          : notification
     );
     return saveData({
       ...data,
@@ -1942,10 +2077,12 @@ export default function App() {
     });
 
   const markNotificationRead = (notificationId) =>
-    saveData({
+    setData({
       ...data,
       notifications: safeArray(data.notifications).map((notification) =>
-        notification.id === notificationId ? { ...notification, read: true } : notification
+        notification.id === notificationId
+          ? { ...notification, read: true }
+          : notification
       ),
     });
 
@@ -1974,7 +2111,9 @@ export default function App() {
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = `museum-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    anchor.download = `museum-backup-${new Date()
+      .toISOString()
+      .slice(0, 10)}.json`;
     anchor.click();
     URL.revokeObjectURL(url);
   };
@@ -2155,8 +2294,18 @@ function PublicSiteHeader({
       key: "education",
       icon: GraduationCap,
     },
-    { label: "НОМ ХЭВЛЭЛ", path: "/publications", key: "publications", icon: BookOpen },
-    { label: "ИЛ ТОД БАЙДАЛ", path: "/transparency", key: "transparency", icon: FileText },
+    {
+      label: "НОМ ХЭВЛЭЛ",
+      path: "/publications",
+      key: "publications",
+      icon: BookOpen,
+    },
+    {
+      label: "ИЛ ТОД БАЙДАЛ",
+      path: "/transparency",
+      key: "transparency",
+      icon: FileText,
+    },
     { label: "ЦАХИМ ТАСАЛБАР", path: "/ticket", key: "ticket", icon: Ticket },
     { label: "VR/AR ҮЗМЭР", path: "/vr-ar", key: "vr-ar", icon: Globe2 },
   ];
@@ -2190,7 +2339,11 @@ function PublicSiteHeader({
           </button>
           <div className="dropdownMenu">
             {aboutItems.map((item) => (
-              <button key={item.path} onClick={() => navigate(item.path)} type="button">
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                type="button"
+              >
                 {item.label}
               </button>
             ))}
@@ -2234,7 +2387,9 @@ function HomePage({ data, totalHalls, totalExhibits, navigate }) {
     <main>
       <section
         className="hero"
-        style={{ backgroundImage: `url("${data.heroImage || museumImages.hero}")` }}
+        style={{
+          backgroundImage: `url("${data.heroImage || museumImages.hero}")`,
+        }}
       >
         <div className="heroContent">
           <span className="eyebrow">
@@ -2244,7 +2399,10 @@ function HomePage({ data, totalHalls, totalExhibits, navigate }) {
           <h1>{data.heroTitle}</h1>
           <p>{data.heroText}</p>
           <div className="heroActions">
-            <button className="primaryButton" onClick={() => navigate("/ticket")}>
+            <button
+              className="primaryButton"
+              onClick={() => navigate("/ticket")}
+            >
               <Ticket size={18} />
               Тасалбар захиалах
             </button>
@@ -2270,7 +2428,10 @@ function HomePage({ data, totalHalls, totalExhibits, navigate }) {
       <section className="sectionSplit aboutOnly" id="about">
         <div>
           <span className="sectionKicker">Танилцуулга</span>
-          <h2>Өв соёлыг судалгаа, боловсрол, орчин үеийн туршлагатай холбох орон зай</h2>
+          <h2>
+            Өв соёлыг судалгаа, боловсрол, орчин үеийн туршлагатай холбох орон
+            зай
+          </h2>
         </div>
         <div>
           <p>{data.about}</p>
@@ -2410,7 +2571,11 @@ function AboutMedia({ content }) {
       {images.length > 0 && (
         <div className="aboutImageGrid">
           {images.map((image, index) => (
-            <img src={image} alt={`${content.title} ${index + 1}`} key={`${image}-${index}`} />
+            <img
+              src={image}
+              alt={`${content.title} ${index + 1}`}
+              key={`${image}-${index}`}
+            />
           ))}
         </div>
       )}
@@ -2422,7 +2587,9 @@ function AboutPage({ data, section, navigate }) {
   const current = section || "greeting";
   const content = data.aboutPages[current] || data.aboutPages.greeting;
   if (content?.published === false) {
-    return <NotFound navigate={navigate} title="Мэдээлэл нийтлэгдээгүй байна" />;
+    return (
+      <NotFound navigate={navigate} title="Мэдээлэл нийтлэгдээгүй байна" />
+    );
   }
   if (current === "structure") {
     return <StructurePage content={data.aboutPages.structure} />;
@@ -2447,13 +2614,19 @@ function GreetingPage({ content }) {
     <main>
       <PageHero
         title={content.title}
-        text={content.subtitle || "Музейн алсын хараа, үнэт зүйл, олон нийтэд чиглэсэн үйл ажиллагааны мэндчилгээ."}
+        text={
+          content.subtitle ||
+          "Музейн алсын хараа, үнэт зүйл, олон нийтэд чиглэсэн үйл ажиллагааны мэндчилгээ."
+        }
         image={content.image || museumImages.gallery}
         eyebrow="Бидний тухай"
       />
       <section className="directorLayout">
         <div className="directorImage">
-          <img src={content.image || museumImages.gallery} alt={content.directorName} />
+          <img
+            src={content.image || museumImages.gallery}
+            alt={content.directorName}
+          />
         </div>
         <article className="articlePanel">
           <span className="sectionKicker">{content.role}</span>
@@ -2565,7 +2738,11 @@ function IntroTimelinePage({ content, slides, navigate }) {
           </article>
         </div>
         <div className="timelineControls">
-          <button onClick={() => move(-1)} type="button" aria-label="Өмнөх слайд">
+          <button
+            onClick={() => move(-1)}
+            type="button"
+            aria-label="Өмнөх слайд"
+          >
             <ArrowLeft size={18} />
           </button>
           <div className="timelineDots">
@@ -2579,7 +2756,11 @@ function IntroTimelinePage({ content, slides, navigate }) {
               />
             ))}
           </div>
-          <button onClick={() => move(1)} type="button" aria-label="Дараагийн слайд">
+          <button
+            onClick={() => move(1)}
+            type="button"
+            aria-label="Дараагийн слайд"
+          >
             <ChevronRight size={18} />
           </button>
         </div>
@@ -2604,9 +2785,14 @@ function PublicationsPage({ data, navigate }) {
             <button
               className="publicationCard"
               key={item.id || `${item.title}-${index}`}
-              onClick={() => navigate(`/publication/${encodeURIComponent(item.id)}`)}
+              onClick={() =>
+                navigate(`/publication/${encodeURIComponent(item.id)}`)
+              }
             >
-              <img src={item.coverImage || museumImages.gallery} alt={item.title} />
+              <img
+                src={item.coverImage || museumImages.gallery}
+                alt={item.title}
+              />
               <span>{item.year || item.date || "Ном хэвлэл"}</span>
               <h2>{item.title}</h2>
               <strong>{item.category}</strong>
@@ -2631,7 +2817,9 @@ function PublicationDetailPage({ item, navigate }) {
       <DetailHero
         eyebrow={item.category}
         title={item.title}
-        text={`${item.year || item.date || ""} ${item.author ? `• ${item.author}` : ""}`}
+        text={`${item.year || item.date || ""} ${
+          item.author ? `• ${item.author}` : ""
+        }`}
         image={item.coverImage || museumImages.gallery}
         navigate={navigate}
       />
@@ -2661,7 +2849,12 @@ function PublicationActions({ files, primaryPdf }) {
     <div className="publicationFiles">
       <div className="qrActions">
         {primaryPdf && (
-          <a className="primaryButton" href={primaryPdf.url} target="_blank" rel="noreferrer">
+          <a
+            className="primaryButton"
+            href={primaryPdf.url}
+            target="_blank"
+            rel="noreferrer"
+          >
             <Eye size={17} />
             PDF харах
           </a>
@@ -2673,7 +2866,12 @@ function PublicationActions({ files, primaryPdf }) {
           </a>
         )}
         {list[0] && (
-          <a className="ghostButton" href={list[0].url} target="_blank" rel="noreferrer">
+          <a
+            className="ghostButton"
+            href={list[0].url}
+            target="_blank"
+            rel="noreferrer"
+          >
             <ExternalLink size={17} />
             Баримт нээх
           </a>
@@ -2697,7 +2895,10 @@ function TransparencyPage({ data }) {
       <section className="sectionWrap compactTop">
         <div className="transparencyGrid">
           {items.map((item, index) => (
-            <article className="transparencyCard" key={`${item.title}-${index}`}>
+            <article
+              className="transparencyCard"
+              key={`${item.title}-${index}`}
+            >
               <span>{item.category || String(index + 1).padStart(2, "0")}</span>
               <h2>{item.title}</h2>
               <time>{item.date}</time>
@@ -2853,7 +3054,9 @@ function EducationGrid({ programs, detailed = false }) {
 }
 
 function ArVrPage({ data }) {
-  const hasModels = safeArray(data.arVrItems).some((item) => isModel3d(item.url));
+  const hasModels = safeArray(data.arVrItems).some((item) =>
+    isModel3d(item.url)
+  );
 
   useEffect(() => {
     if (!hasModels || typeof window === "undefined") return;
@@ -2861,7 +3064,8 @@ function ArVrPage({ data }) {
     if (document.querySelector("script[data-model-viewer]")) return;
     const script = document.createElement("script");
     script.type = "module";
-    script.src = "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
+    script.src =
+      "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
     script.dataset.modelViewer = "true";
     document.head.appendChild(script);
   }, [hasModels]);
@@ -2886,9 +3090,9 @@ function ArVrPage({ data }) {
             <span>Meta Quest / Pico Browser</span>
             <h3>VR төхөөрөмжийн Browser дээр site link-ээр орж үзнэ.</h3>
             <p>
-              YouTube 360 холбоосыг headset browser дээр нээж, direct 360 видео эсвэл 360 зургийг
-              fullscreen горимоор томруулан үзнэ. Desktop болон mobile дээр энгийн fallback view
-              автоматаар ажиллана.
+              YouTube 360 холбоосыг headset browser дээр нээж, direct 360 видео
+              эсвэл 360 зургийг fullscreen горимоор томруулан үзнэ. Desktop
+              болон mobile дээр энгийн fallback view автоматаар ажиллана.
             </p>
           </div>
           <div className="vrGuideSteps">
@@ -2904,7 +3108,9 @@ function ArVrPage({ data }) {
 }
 
 function ArVrGrid({ items, compact = false }) {
-  const playableItems = safeArray(items).filter((item) => item.url || item.fallbackVideo);
+  const playableItems = safeArray(items).filter(
+    (item) => item.url || item.fallbackVideo
+  );
   return (
     <div className={compact ? "arVrGrid compact" : "arVrGrid"}>
       {playableItems.map((item, index) => (
@@ -2928,10 +3134,10 @@ function ArVrCard({ item, index }) {
     : youtube
     ? "YouTube 360"
     : directVideo
-      ? "Direct 360 video"
-      : directImage
-        ? "360 image"
-        : "Fallback view";
+    ? "Direct 360 video"
+    : directImage
+    ? "360 image"
+    : "Fallback view";
 
   return (
     <article className="arVrCard headsetCard">
@@ -2939,7 +3145,7 @@ function ArVrCard({ item, index }) {
         <span className="vrModePill">{mediaLabel}</span>
         {model3d ? (
           <model-viewer
-            class="modelViewer"
+            className="modelViewer"
             src={mediaUrl}
             poster={item.thumbnail || museumImages.vr}
             camera-controls="true"
@@ -2986,23 +3192,44 @@ function ArVrCard({ item, index }) {
         <h3>{item.title}</h3>
         <p>{item.desc}</p>
         <p className="vrFallbackNote">
-          Desktop/mobile дээр энгийн view ажиллана. Meta Quest Browser болон Pico Browser дээр том
-          товчоор media-г нээгээд fullscreen горим ашиглана.
+          Desktop/mobile дээр энгийн view ажиллана. Meta Quest Browser болон
+          Pico Browser дээр том товчоор media-г нээгээд fullscreen горим
+          ашиглана.
         </p>
         <div className="vrActionRow">
           {model3d && (
-            <button className="primaryButton vrBigButton" onClick={() => activateModelAr(mediaId)}>
+            <button
+              type="button"
+              className="primaryButton vrBigButton"
+              onClick={() => activateModelAr(mediaId)}
+            >
               <Sparkles size={20} />
-              AR view
+              AR / 3D view
             </button>
           )}
+
           {openUrl && (
-            <a className="primaryButton vrBigButton" href={openUrl} target="_blank" rel="noreferrer">
+            <button
+              type="button"
+              className="primaryButton vrBigButton"
+              onClick={() => {
+                if (model3d) {
+                  requestFullscreen(mediaId);
+                } else {
+                  window.open(openUrl, "_blank", "noopener,noreferrer");
+                }
+              }}
+            >
               <Globe2 size={20} />
               VR төхөөрөмжөөр үзэх
-            </a>
+            </button>
           )}
-          <button className="ghostButton vrBigButton" onClick={() => requestFullscreen(mediaId)}>
+
+          <button
+            type="button"
+            className="ghostButton vrBigButton"
+            onClick={() => requestFullscreen(mediaId)}
+          >
             <Maximize2 size={20} />
             Fullscreen
           </button>
@@ -3065,7 +3292,14 @@ function HallDetailPage({ detail, navigate }) {
                 className="exhibitCard"
                 key={exhibit.id || exhibit.title + exhibitIndex}
                 onClick={() =>
-                  navigate(exhibitPublicPath(exhibit, floorIndex, hallIndex, exhibitIndex))
+                  navigate(
+                    exhibitPublicPath(
+                      exhibit,
+                      floorIndex,
+                      hallIndex,
+                      exhibitIndex
+                    )
+                  )
                 }
               >
                 <img
@@ -3082,7 +3316,10 @@ function HallDetailPage({ detail, navigate }) {
 
         <aside className="detailAside">
           <QrBox url={url} />
-          <button className="primaryButton full" onClick={() => navigate("/ticket")}>
+          <button
+            className="primaryButton full"
+            onClick={() => navigate("/ticket")}
+          >
             <Ticket size={18} />
             Аялал захиалах
           </button>
@@ -3144,7 +3381,11 @@ function ExhibitDetailPage({ detail, navigate }) {
               <h2>4 талын зураг</h2>
               <div className="sidePhotoGrid">
                 {safeArray(exhibit.sidePhotos).map((image, index) => (
-                  <img src={image} alt={`${exhibit.title} тал ${index + 1}`} key={image + index} />
+                  <img
+                    src={image}
+                    alt={`${exhibit.title} тал ${index + 1}`}
+                    key={image + index}
+                  />
                 ))}
               </div>
             </div>
@@ -3254,13 +3495,20 @@ function AudioList({ items }) {
 
 function DocumentLinks({ items, title }) {
   if (!safeArray(items).length) return null;
-  const files = safeArray(items).map(normalizeFileItem).filter((item) => item.url);
+  const files = safeArray(items)
+    .map(normalizeFileItem)
+    .filter((item) => item.url);
   return (
     <div className="docBlock">
       <h3>{title}</h3>
       <div className="docList">
         {files.map((item, index) => (
-          <a href={item.url} target="_blank" rel="noreferrer" key={item.url + index}>
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noreferrer"
+            key={item.url + index}
+          >
             <FileText size={18} />
             {item.title || `Материал ${index + 1}`}
             <ExternalLink size={15} />
@@ -3280,7 +3528,13 @@ function Meta({ label, value }) {
   );
 }
 
-function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate }) {
+function TicketPage({
+  data,
+  subPage,
+  addTicketRequest,
+  markTicketPaid,
+  navigate,
+}) {
   const existingOrder = subPage
     ? safeArray(data.ticketRequests).find((order) => order.id === subPage)
     : null;
@@ -3304,7 +3558,8 @@ function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate 
 
   const selectedTicket =
     ticketTypes.find((item) => item.id === form.ticketTypeId) || defaultTicket;
-  const total = Number(selectedTicket.price || 0) * Math.max(1, Number(form.quantity || 1));
+  const total =
+    Number(selectedTicket.price || 0) * Math.max(1, Number(form.quantity || 1));
 
   const setField = (field, value) =>
     setForm((current) => ({ ...current, [field]: value }));
@@ -3330,11 +3585,19 @@ function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate 
           ? "Захиалга амжилттай үүслээ. Firebase түр ажиллахгүй байгаа тул localStorage-д хадгаллаа."
           : "Захиалга амжилттай үүслээ. Төлбөрийн QR кодыг уншуулна уу."
       );
-      setForm((current) => ({ ...current, name: "", phone: "", email: "", note: "" }));
+      setForm((current) => ({
+        ...current,
+        name: "",
+        phone: "",
+        email: "",
+        note: "",
+      }));
     } catch (error) {
       console.error("Ticket order error:", error);
       setMessageType("error");
-      setSent("Захиалга үүсгэх явцад алдаа гарлаа. Түр хүлээгээд дахин оролдоно уу.");
+      setSent(
+        "Захиалга үүсгэх явцад алдаа гарлаа. Түр хүлээгээд дахин оролдоно уу."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -3343,7 +3606,12 @@ function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate 
   const markDemoPaid = async () => {
     if (!activeOrder?.id) return;
     await markTicketPaid(activeOrder.id);
-    setActiveOrder({ ...activeOrder, paymentStatus: "paid", status: "paid", paidAt: new Date().toISOString() });
+    setActiveOrder({
+      ...activeOrder,
+      paymentStatus: "paid",
+      status: "paid",
+      paidAt: new Date().toISOString(),
+    });
     setMessageType("success");
     setSent("Demo төлбөр төлөгдсөн гэж тэмдэглэлээ. E-ticket QR үүслээ.");
   };
@@ -3363,12 +3631,22 @@ function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate 
       <section className="ticketLayout checkoutLayout">
         {!subPage && (
           <form className="ticketForm" onSubmit={submit}>
-            {sent && <div className={messageType === "error" ? "successNote error" : "successNote"}>{sent}</div>}
+            {sent && (
+              <div
+                className={
+                  messageType === "error" ? "successNote error" : "successNote"
+                }
+              >
+                {sent}
+              </div>
+            )}
             <label className="field">
               <span>Тасалбарын төрөл</span>
               <select
                 value={form.ticketTypeId}
-                onChange={(event) => setField("ticketTypeId", event.target.value)}
+                onChange={(event) =>
+                  setField("ticketTypeId", event.target.value)
+                }
               >
                 {ticketTypes.map((item) => (
                   <option value={item.id} key={item.id}>
@@ -3377,24 +3655,61 @@ function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate 
                 ))}
               </select>
             </label>
-            <TextField label="Тоо ширхэг" type="number" min="1" value={form.quantity} onChange={(value) => setField("quantity", value)} required />
-            <TextField label="Үзэх өдөр" type="date" value={form.date} onChange={(value) => setField("date", value)} required />
-            <TextField label="Нэр" value={form.name} onChange={(value) => setField("name", value)} required />
-            <TextField label="Утас" value={form.phone} onChange={(value) => setField("phone", value)} required />
-            <TextField label="Email" value={form.email} onChange={(value) => setField("email", value)} />
-            <TextArea label="Нэмэлт тэмдэглэл" value={form.note} onChange={(value) => setField("note", value)} />
+            <TextField
+              label="Тоо ширхэг"
+              type="number"
+              min="1"
+              value={form.quantity}
+              onChange={(value) => setField("quantity", value)}
+              required
+            />
+            <TextField
+              label="Үзэх өдөр"
+              type="date"
+              value={form.date}
+              onChange={(value) => setField("date", value)}
+              required
+            />
+            <TextField
+              label="Нэр"
+              value={form.name}
+              onChange={(value) => setField("name", value)}
+              required
+            />
+            <TextField
+              label="Утас"
+              value={form.phone}
+              onChange={(value) => setField("phone", value)}
+              required
+            />
+            <TextField
+              label="Email"
+              value={form.email}
+              onChange={(value) => setField("email", value)}
+            />
+            <TextArea
+              label="Нэмэлт тэмдэглэл"
+              value={form.note}
+              onChange={(value) => setField("note", value)}
+            />
             <div className="checkoutTotal">
               <span>Нийт дүн</span>
               <strong>{total.toLocaleString()} MNT</strong>
             </div>
-            <button className="primaryButton" type="submit" disabled={submitting}>
+            <button
+              className="primaryButton"
+              type="submit"
+              disabled={submitting}
+            >
               <CalendarCheck size={18} />
               {submitting ? "Захиалга үүсгэж байна..." : "Захиалга үүсгэх"}
             </button>
           </form>
         )}
 
-        <aside className={activeOrder ? "ticketAside paymentPanel" : "ticketAside"}>
+        <aside
+          className={activeOrder ? "ticketAside paymentPanel" : "ticketAside"}
+        >
           {activeOrder ? (
             <TicketPaymentPanel
               order={activeOrder}
@@ -3405,10 +3720,13 @@ function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate 
             <>
               <h2>QPay төлбөр</h2>
               <p>
-                Demo горимд бодит QPay credential шаардлагагүй. Live горим нь backend/serverless
-                QPay холболт бэлэн болсны дараа ашиглагдана.
+                Demo горимд бодит QPay credential шаардлагагүй. Live горим нь
+                backend/serverless QPay холболт бэлэн болсны дараа ашиглагдана.
               </p>
-              <button className="ghostButton full" onClick={() => navigate("/education")}>
+              <button
+                className="ghostButton full"
+                onClick={() => navigate("/education")}
+              >
                 <GraduationCap size={18} />
                 Боловсролын хөтөлбөр
               </button>
@@ -3423,10 +3741,17 @@ function TicketPage({ data, subPage, addTicketRequest, markTicketPaid, navigate 
 function TicketPaymentPanel({ order, paymentMode, onMarkPaid }) {
   const paid = order.paymentStatus === "paid";
   const eTicketUrl = `${window.location.origin}/ticket/${order.id}`;
-  const hasPaymentQr = paid || paymentMode !== "live" || order.qpayPayload || order.paymentUrl;
+  const hasPaymentQr =
+    paid || paymentMode !== "live" || order.qpayPayload || order.paymentUrl;
   return (
     <>
-      <h2>{paid ? "E-ticket бэлэн" : paymentMode === "live" && !hasPaymentQr ? "QPay Live бэлтгэл" : "QPay QR"}</h2>
+      <h2>
+        {paid
+          ? "E-ticket бэлэн"
+          : paymentMode === "live" && !hasPaymentQr
+          ? "QPay Live бэлтгэл"
+          : "QPay QR"}
+      </h2>
       <p>
         {order.ticketType} • {order.quantity} ширхэг •{" "}
         {Number(order.totalAmount).toLocaleString()} MNT
@@ -3435,10 +3760,16 @@ function TicketPaymentPanel({ order, paymentMode, onMarkPaid }) {
         <div className="qpayCard">
           <span>{paymentMode === "live" ? "QPay Live" : "QPay Demo"}</span>
           <img
-            src={qrUrl(paid ? eTicketUrl : order.qpayPayload || order.paymentUrl || eTicketUrl)}
+            src={qrUrl(
+              paid
+                ? eTicketUrl
+                : order.qpayPayload || order.paymentUrl || eTicketUrl
+            )}
             alt={paid ? "E-ticket QR" : "QPay QR"}
           />
-          <strong>{paid ? "Төлбөр төлөгдсөн" : "Төлбөр хүлээгдэж байна"}</strong>
+          <strong>
+            {paid ? "Төлбөр төлөгдсөн" : "Төлбөр хүлээгдэж байна"}
+          </strong>
         </div>
       )}
       {paymentMode === "demo" && !paid && (
@@ -3449,11 +3780,17 @@ function TicketPaymentPanel({ order, paymentMode, onMarkPaid }) {
       )}
       {paymentMode === "live" && !paid && (
         <div className="adminNotice">
-          QPay Live-д backend/serverless invoice болон payment check endpoint шаардлагатай.
+          QPay Live-д backend/serverless invoice болон payment check endpoint
+          шаардлагатай.
         </div>
       )}
       {paid && (
-        <a className="ghostButton full" href={eTicketUrl} target="_blank" rel="noreferrer">
+        <a
+          className="ghostButton full"
+          href={eTicketUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
           <ExternalLink size={18} />
           E-ticket нээх
         </a>
@@ -3497,7 +3834,11 @@ function NewsSection({ news }) {
       </div>
       <div className="newsGrid">
         {safeArray(news).map((item, index) => (
-          <article className="newsCard" id={`news-${index}`} key={item.title + index}>
+          <article
+            className="newsCard"
+            id={`news-${index}`}
+            key={item.title + index}
+          >
             <time>{item.date}</time>
             <h3>{item.title}</h3>
             <p>{item.desc}</p>
@@ -3537,15 +3878,26 @@ function AdminQrSection({ title, exhibitId, url }) {
           </a>
         </div>
         <div className="qrActions">
-          <a className="ghostButton" href={url} target="_blank" rel="noreferrer">
+          <a
+            className="ghostButton"
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+          >
             <ExternalLink size={17} />
             Preview
           </a>
-          <button className="ghostButton" onClick={() => downloadQrCode(url, title)}>
+          <button
+            className="ghostButton"
+            onClick={() => downloadQrCode(url, title)}
+          >
             <Download size={17} />
             Татах
           </button>
-          <button className="primaryButton" onClick={() => printQrCode(url, title)}>
+          <button
+            className="primaryButton"
+            onClick={() => printQrCode(url, title)}
+          >
             <QrCode size={17} />
             Хэвлэх
           </button>
@@ -3565,7 +3917,9 @@ function Footer({ data, navigate }) {
       </div>
       <div>
         <button onClick={() => navigate("/halls")}>Танхим</button>
-        <button onClick={() => navigate("/education")}>Боловсролын хөтөлбөр</button>
+        <button onClick={() => navigate("/education")}>
+          Боловсролын хөтөлбөр
+        </button>
         <button onClick={() => navigate("/vr-ar")}>VR/AR үзмэр</button>
         <button onClick={() => navigate("/ticket")}>Цахим тасалбар</button>
       </div>
@@ -3695,7 +4049,9 @@ function AdminPage(props) {
     if (window.sessionStorage.getItem(key)) return;
     window.sessionStorage.setItem(key, "1");
     new Notification("Шинэ тасалбарын захиалга", {
-      body: `${latest.customerName} • ${latest.ticketType} • ${latest.totalAmount.toLocaleString()} MNT`,
+      body: `${latest.customerName} • ${
+        latest.ticketType
+      } • ${latest.totalAmount.toLocaleString()} MNT`,
     });
   }, [adminLoggedIn, data.notifications]);
 
@@ -3711,7 +4067,9 @@ function AdminPage(props) {
     ticketFilter === "all"
       ? ticketOrders
       : ticketOrders.filter(
-          (order) => paymentStatusKey(order.paymentStatus || order.status) === ticketFilter
+          (order) =>
+            paymentStatusKey(order.paymentStatus || order.status) ===
+            ticketFilter
         );
   const ticketNotifications = safeArray(data.notifications);
 
@@ -3767,9 +4125,14 @@ function AdminPage(props) {
           </span>
           <h1>Админ нэвтрэх</h1>
           <p>
-            Удирдлагын самбар зөвхөн баталгаажсан админ хэрэглэгч нэвтэрсний дараа нээгдэнэ.
+            Удирдлагын самбар зөвхөн баталгаажсан админ хэрэглэгч нэвтэрсний
+            дараа нээгдэнэ.
           </p>
-          {authUser && <div className="adminNotice">Firebase хэрэглэгч идэвхтэй боловч админ session идэвхгүй байна.</div>}
+          {authUser && (
+            <div className="adminNotice">
+              Firebase хэрэглэгч идэвхтэй боловч админ session идэвхгүй байна.
+            </div>
+          )}
           {dbError && <div className="adminNotice error">{dbError}</div>}
           <TextField
             label="Email"
@@ -3788,7 +4151,11 @@ function AdminPage(props) {
             <ShieldCheck size={18} />
             Админ нэвтрэх
           </button>
-          <button className="ghostButton full" type="button" onClick={() => navigate("/")}>
+          <button
+            className="ghostButton full"
+            type="button"
+            onClick={() => navigate("/")}
+          >
             <Home size={18} />
             Нүүр рүү буцах
           </button>
@@ -3868,34 +4235,77 @@ function AdminPage(props) {
               {uploading
                 ? `${uploading} байршуулж байна...`
                 : saving
-                  ? "Өөрчлөлт хадгалж байна..."
-                  : dbStatus || "Өөрчлөлт Firebase database руу хадгалагдана."}
+                ? "Өөрчлөлт хадгалж байна..."
+                : dbStatus || "Өөрчлөлт Firebase database руу хадгалагдана."}
             </p>
           </div>
-          <span className={saving || uploading ? "savePill busy" : "savePill"}>
-            <Save size={16} />
-            {saving || uploading ? "Working" : "Ready"}
-          </span>
-        </div>
 
+          <div className="adminTopActions">
+            <span
+              className={saving || uploading ? "savePill busy" : "savePill"}
+            >
+              <Save size={16} />
+              {saving || uploading ? "Working" : "Ready"}
+            </span>
+
+            <button
+              className="primaryButton"
+              type="button"
+              onClick={() => saveData(data)}
+            >
+              <Save size={16} />
+              Хадгалах
+            </button>
+          </div>
+        </div>
+        <button
+          className="primaryButton"
+          type="button"
+          onClick={() => saveData(data)}
+        >
+          <Save size={16} />
+          Хадгалах
+        </button>
         {dbError && <div className="adminNotice error">{dbError}</div>}
 
         {tab === "dashboard" && (
           <div className="adminStack">
             <div className="adminStats">
-              <AdminMetric label="Давхар" value={data.floors.length} icon={Building2} />
+              <AdminMetric
+                label="Давхар"
+                value={data.floors.length}
+                icon={Building2}
+              />
               <AdminMetric label="Танхим" value={totalHalls} icon={Layers3} />
-              <AdminMetric label="Үзмэр" value={totalExhibits} icon={Sparkles} />
-              <AdminMetric label="Хүсэлт" value={safeArray(data.ticketRequests).length} icon={Ticket} />
-              <AdminMetric label="Шинэ мэдэгдэл" value={unreadNotifications} icon={Bell} />
+              <AdminMetric
+                label="Үзмэр"
+                value={totalExhibits}
+                icon={Sparkles}
+              />
+              <AdminMetric
+                label="Хүсэлт"
+                value={safeArray(data.ticketRequests).length}
+                icon={Ticket}
+              />
+              <AdminMetric
+                label="Шинэ мэдэгдэл"
+                value={unreadNotifications}
+                icon={Bell}
+              />
             </div>
             <div className="adminBlock">
               <h2>Firebase тохиргооны зөвлөмж</h2>
               <div className="statusGrid">
                 <Status label="Auth" value="Admin login шаардлагатай" />
-                <Status label="Database rules" value="Read public, write admin байх хэрэгтэй" />
+                <Status
+                  label="Database rules"
+                  value="Read public, write admin байх хэрэгтэй"
+                />
                 <Status label="Ticket fallback" value="localStorage enabled" />
-                <Status label="Media upload" value="Cloudinary preset ашиглана" />
+                <Status
+                  label="Media upload"
+                  value="Cloudinary preset ашиглана"
+                />
               </div>
             </div>
           </div>
@@ -3905,29 +4315,102 @@ function AdminPage(props) {
           <div className="adminGrid">
             <div className="adminBlock">
               <h2>Ерөнхий мэдээлэл</h2>
-              <TextField label="Музейн нэр" value={data.museumName} onChange={(value) => updateField("museumName", value)} />
-              <TextField label="Slogan" value={data.slogan} onChange={(value) => updateField("slogan", value)} />
-              <TextField label="Logo background color" value={data.logoBg} onChange={(value) => updateField("logoBg", value)} />
-              <UploadBox title="Logo upload" accept="image/*" onUpload={uploadLogo} preview={data.logo} />
+              <TextField
+                label="Музейн нэр"
+                value={data.museumName}
+                onChange={(value) => updateField("museumName", value)}
+              />
+              <TextField
+                label="Slogan"
+                value={data.slogan}
+                onChange={(value) => updateField("slogan", value)}
+              />
+              <TextField
+                label="Logo background color"
+                value={data.logoBg}
+                onChange={(value) => updateField("logoBg", value)}
+              />
+              <UploadBox
+                title="Logo upload"
+                accept="image/*"
+                onUpload={uploadLogo}
+                preview={data.logo}
+              />
             </div>
             <div className="adminBlock">
               <h2>Hero ба танилцуулга</h2>
-              <TextField label="Hero гарчиг" value={data.heroTitle} onChange={(value) => updateField("heroTitle", value)} />
-              <TextArea label="Hero тайлбар" value={data.heroText} onChange={(value) => updateField("heroText", value)} />
-              <UploadBox title="Home hero зураг" accept="image/*" onUpload={(file) => uploadHero("heroImage", file)} preview={data.heroImage} />
-              <UploadBox title="Halls hero зураг" accept="image/*" onUpload={(file) => uploadHero("hallsHeroImage", file)} preview={data.hallsHeroImage} />
-              <UploadBox title="Education hero зураг" accept="image/*" onUpload={(file) => uploadHero("educationHeroImage", file)} preview={data.educationHeroImage} />
-              <UploadBox title="VR/AR үзмэр hero зураг" accept="image/*" onUpload={(file) => uploadHero("arVrHeroImage", file)} preview={data.arVrHeroImage} />
-              <TextArea label="Музейн тухай" value={data.about} onChange={(value) => updateField("about", value)} />
+              <TextField
+                label="Hero гарчиг"
+                value={data.heroTitle}
+                onChange={(value) => updateField("heroTitle", value)}
+              />
+              <TextArea
+                label="Hero тайлбар"
+                value={data.heroText}
+                onChange={(value) => updateField("heroText", value)}
+              />
+              <UploadBox
+                title="Home hero зураг"
+                accept="image/*"
+                onUpload={(file) => uploadHero("heroImage", file)}
+                preview={data.heroImage}
+              />
+              <UploadBox
+                title="Halls hero зураг"
+                accept="image/*"
+                onUpload={(file) => uploadHero("hallsHeroImage", file)}
+                preview={data.hallsHeroImage}
+              />
+              <UploadBox
+                title="Education hero зураг"
+                accept="image/*"
+                onUpload={(file) => uploadHero("educationHeroImage", file)}
+                preview={data.educationHeroImage}
+              />
+              <UploadBox
+                title="VR/AR үзмэр hero зураг"
+                accept="image/*"
+                onUpload={(file) => uploadHero("arVrHeroImage", file)}
+                preview={data.arVrHeroImage}
+              />
+              <TextArea
+                label="Музейн тухай"
+                value={data.about}
+                onChange={(value) => updateField("about", value)}
+              />
             </div>
             <div className="adminBlock">
               <h2>Зочлох мэдээлэл</h2>
-              <TextField label="Цагийн хуваарь" value={data.visit.time} onChange={(value) => updateNested("visit", "time", value)} />
-              <TextArea label="Тасалбарын мэдээлэл" value={data.visit.ticket} onChange={(value) => updateNested("visit", "ticket", value)} />
-              <TextField label="Байршил" value={data.visit.address} onChange={(value) => updateNested("visit", "address", value)} />
-              <TextField label="Google map embed URL" value={data.visit.mapEmbed} onChange={(value) => updateNested("visit", "mapEmbed", value)} />
-              <TextField label="Email" value={data.contact.email} onChange={(value) => updateNested("contact", "email", value)} />
-              <TextField label="Утас" value={data.contact.phone} onChange={(value) => updateNested("contact", "phone", value)} />
+              <TextField
+                label="Цагийн хуваарь"
+                value={data.visit.time}
+                onChange={(value) => updateNested("visit", "time", value)}
+              />
+              <TextArea
+                label="Тасалбарын мэдээлэл"
+                value={data.visit.ticket}
+                onChange={(value) => updateNested("visit", "ticket", value)}
+              />
+              <TextField
+                label="Байршил"
+                value={data.visit.address}
+                onChange={(value) => updateNested("visit", "address", value)}
+              />
+              <TextField
+                label="Google map embed URL"
+                value={data.visit.mapEmbed}
+                onChange={(value) => updateNested("visit", "mapEmbed", value)}
+              />
+              <TextField
+                label="Email"
+                value={data.contact.email}
+                onChange={(value) => updateNested("contact", "email", value)}
+              />
+              <TextField
+                label="Утас"
+                value={data.contact.phone}
+                onChange={(value) => updateNested("contact", "phone", value)}
+              />
             </div>
           </div>
         )}
@@ -3939,12 +4422,22 @@ function AdminPage(props) {
               <input
                 type="checkbox"
                 checked={data.loader.enabled}
-                onChange={(event) => updateNested("loader", "enabled", event.target.checked)}
+                onChange={(event) =>
+                  updateNested("loader", "enabled", event.target.checked)
+                }
               />
               Loading дэлгэц асаах
             </label>
-            <TextField label="Loading гарчиг" value={data.loader.text} onChange={(value) => updateNested("loader", "text", value)} />
-            <TextField label="Loading дэд бичвэр" value={data.loader.subText} onChange={(value) => updateNested("loader", "subText", value)} />
+            <TextField
+              label="Loading гарчиг"
+              value={data.loader.text}
+              onChange={(value) => updateNested("loader", "text", value)}
+            />
+            <TextField
+              label="Loading дэд бичвэр"
+              value={data.loader.subText}
+              onChange={(value) => updateNested("loader", "subText", value)}
+            />
             <UploadBox
               title="Loading зураг"
               accept="image/*"
@@ -3964,7 +4457,11 @@ function AdminPage(props) {
         {(tab === "halls" || tab === "exhibits") && (
           <div className="adminStack">
             <div className="adminActionBar">
-              <h2>{tab === "exhibits" ? "Үзмэрийн удирдлага" : "Танхимын удирдлага"}</h2>
+              <h2>
+                {tab === "exhibits"
+                  ? "Үзмэрийн удирдлага"
+                  : "Танхимын удирдлага"}
+              </h2>
               <button className="primaryButton" onClick={addFloor}>
                 <Plus size={18} />
                 Давхар нэмэх
@@ -3972,28 +4469,70 @@ function AdminPage(props) {
             </div>
 
             {data.floors.map((floor, floorIndex) => (
-              <div className="adminBlock floorEditor" key={`${floor.name}-${floorIndex}`}>
+              <div
+                className="adminBlock floorEditor"
+                key={`${floor.name}-${floorIndex}`}
+              >
                 <div className="adminBlockHead">
                   <div>
                     <span className="sectionKicker">{floor.name}</span>
                     <h2>{floor.title}</h2>
                   </div>
-                  <button className="dangerButton" onClick={() => deleteFloor(floorIndex)}>
+                  <button
+                    className="dangerButton"
+                    onClick={() => deleteFloor(floorIndex)}
+                  >
                     <Trash2 size={17} />
                     Давхар устгах
                   </button>
                 </div>
                 <div className="formGrid">
-                  <TextField label="Давхар нэр" value={floor.name} onChange={(value) => updateFloor(floorIndex, "name", value)} />
-                  <TextField label="Давхар гарчиг" value={floor.title} onChange={(value) => updateFloor(floorIndex, "title", value)} />
+                  <TextField
+                    label="Давхар нэр"
+                    value={floor.name}
+                    onChange={(value) => updateFloor(floorIndex, "name", value)}
+                  />
+                  <TextField
+                    label="Давхар гарчиг"
+                    value={floor.title}
+                    onChange={(value) =>
+                      updateFloor(floorIndex, "title", value)
+                    }
+                  />
                 </div>
-                <TextArea label="Давхар тайлбар" value={floor.desc} onChange={(value) => updateFloor(floorIndex, "desc", value)} />
+                <TextArea
+                  label="Давхар тайлбар"
+                  value={floor.desc}
+                  onChange={(value) => updateFloor(floorIndex, "desc", value)}
+                />
                 <div className="mediaAdminGrid">
-                  <UploadBox title="Давхрын зураг" accept="image/*" onUpload={(file) => uploadFloorImage(floorIndex, file)} preview={floor.image} />
-                  <UploadBox title="Давхрын видео" accept="video/*" onUpload={(files) => uploadFloorVideos(floorIndex, files)} multiple video />
+                  <UploadBox
+                    title="Давхрын зураг"
+                    accept="image/*"
+                    onUpload={(file) => uploadFloorImage(floorIndex, file)}
+                    preview={floor.image}
+                  />
+                  <UploadBox
+                    title="Давхрын видео"
+                    accept="video/*"
+                    onUpload={(files) => uploadFloorVideos(floorIndex, files)}
+                    multiple
+                    video
+                  />
                 </div>
-                <MediaList items={floor.videos} video onDelete={(index) => deleteMedia("floor", [floorIndex], "videos", index)} />
-                <UrlAdd label="Давхрын видео URL" onAdd={(url) => addUrlMedia("floor", [floorIndex], "videos", url)} />
+                <MediaList
+                  items={floor.videos}
+                  video
+                  onDelete={(index) =>
+                    deleteMedia("floor", [floorIndex], "videos", index)
+                  }
+                />
+                <UrlAdd
+                  label="Давхрын видео URL"
+                  onAdd={(url) =>
+                    addUrlMedia("floor", [floorIndex], "videos", url)
+                  }
+                />
 
                 <div className="nestedAction">
                   <button onClick={() => addHall(floorIndex)}>
@@ -4009,23 +4548,65 @@ function AdminPage(props) {
                     <div className="hallEditor" key={key}>
                       <div className="hallEditorHead">
                         <button onClick={() => setOpenHall(isOpen ? "" : key)}>
-                          <ChevronRight size={18} className={isOpen ? "rotated" : ""} />
+                          <ChevronRight
+                            size={18}
+                            className={isOpen ? "rotated" : ""}
+                          />
                           <span>
                             <strong>{hall.title}</strong>
-                            <small>{safeArray(hall.exhibits).length} үзмэр</small>
+                            <small>
+                              {safeArray(hall.exhibits).length} үзмэр
+                            </small>
                           </span>
                         </button>
-                        <button className="dangerMini" onClick={() => deleteHall(floorIndex, hallIndex)}>
+                        <button
+                          className="dangerMini"
+                          onClick={() => deleteHall(floorIndex, hallIndex)}
+                        >
                           <Trash2 size={16} />
                         </button>
                       </div>
 
                       {isOpen && (
                         <div className="adminEditor">
-                          <TextField label="Танхим нэр" value={hall.title} onChange={(value) => updateHall(floorIndex, hallIndex, "title", value)} />
-                          <TextField label="Ангилал" value={hall.category} onChange={(value) => updateHall(floorIndex, hallIndex, "category", value)} />
-                          <TextArea label="Товч тайлбар" value={hall.shortDesc} onChange={(value) => updateHall(floorIndex, hallIndex, "shortDesc", value)} />
-                          <TextArea label="Дэлгэрэнгүй тайлбар" value={hall.desc} onChange={(value) => updateHall(floorIndex, hallIndex, "desc", value)} />
+                          <TextField
+                            label="Танхим нэр"
+                            value={hall.title}
+                            onChange={(value) =>
+                              updateHall(floorIndex, hallIndex, "title", value)
+                            }
+                          />
+                          <TextField
+                            label="Ангилал"
+                            value={hall.category}
+                            onChange={(value) =>
+                              updateHall(
+                                floorIndex,
+                                hallIndex,
+                                "category",
+                                value
+                              )
+                            }
+                          />
+                          <TextArea
+                            label="Товч тайлбар"
+                            value={hall.shortDesc}
+                            onChange={(value) =>
+                              updateHall(
+                                floorIndex,
+                                hallIndex,
+                                "shortDesc",
+                                value
+                              )
+                            }
+                          />
+                          <TextArea
+                            label="Дэлгэрэнгүй тайлбар"
+                            value={hall.desc}
+                            onChange={(value) =>
+                              updateHall(floorIndex, hallIndex, "desc", value)
+                            }
+                          />
                           <MediaEditor
                             title="Танхимын медиа"
                             scope="hall"
@@ -4036,50 +4617,154 @@ function AdminPage(props) {
                             addUrlMedia={addUrlMedia}
                           />
                           <div className="nestedAction">
-                            <button onClick={() => addExhibit(floorIndex, hallIndex)}>
+                            <button
+                              onClick={() => addExhibit(floorIndex, hallIndex)}
+                            >
                               <Plus size={17} />
                               Үзмэр нэмэх
                             </button>
                           </div>
-                          {safeArray(hall.exhibits).map((exhibit, exhibitIndex) => (
-                            <div className="exhibitEditor" key={`${key}-${exhibitIndex}`}>
-                              <div className="adminBlockHead">
-                                <h3>{exhibit.title}</h3>
-                                <button className="dangerMini" onClick={() => deleteExhibit(floorIndex, hallIndex, exhibitIndex)}>
-                                  <Trash2 size={16} />
-                                </button>
+                          {safeArray(hall.exhibits).map(
+                            (exhibit, exhibitIndex) => (
+                              <div
+                                className="exhibitEditor"
+                                key={`${key}-${exhibitIndex}`}
+                              >
+                                <div className="adminBlockHead">
+                                  <h3>{exhibit.title}</h3>
+                                  <button
+                                    className="dangerMini"
+                                    onClick={() =>
+                                      deleteExhibit(
+                                        floorIndex,
+                                        hallIndex,
+                                        exhibitIndex
+                                      )
+                                    }
+                                  >
+                                    <Trash2 size={16} />
+                                  </button>
+                                </div>
+                                <div className="formGrid">
+                                  <TextField
+                                    label="Үзмэр нэр"
+                                    value={exhibit.title}
+                                    onChange={(value) =>
+                                      updateExhibit(
+                                        floorIndex,
+                                        hallIndex,
+                                        exhibitIndex,
+                                        "title",
+                                        value
+                                      )
+                                    }
+                                  />
+                                  <TextField
+                                    label="Ангилал"
+                                    value={exhibit.category}
+                                    onChange={(value) =>
+                                      updateExhibit(
+                                        floorIndex,
+                                        hallIndex,
+                                        exhibitIndex,
+                                        "category",
+                                        value
+                                      )
+                                    }
+                                  />
+                                  <TextField
+                                    label="Он цаг"
+                                    value={exhibit.period}
+                                    onChange={(value) =>
+                                      updateExhibit(
+                                        floorIndex,
+                                        hallIndex,
+                                        exhibitIndex,
+                                        "period",
+                                        value
+                                      )
+                                    }
+                                  />
+                                  <TextField
+                                    label="Материал"
+                                    value={exhibit.material}
+                                    onChange={(value) =>
+                                      updateExhibit(
+                                        floorIndex,
+                                        hallIndex,
+                                        exhibitIndex,
+                                        "material",
+                                        value
+                                      )
+                                    }
+                                  />
+                                  <TextField
+                                    label="Олдсон газар"
+                                    value={exhibit.foundPlace}
+                                    onChange={(value) =>
+                                      updateExhibit(
+                                        floorIndex,
+                                        hallIndex,
+                                        exhibitIndex,
+                                        "foundPlace",
+                                        value
+                                      )
+                                    }
+                                  />
+                                </div>
+                                <TextArea
+                                  label="Товч тайлбар"
+                                  value={exhibit.shortDesc}
+                                  onChange={(value) =>
+                                    updateExhibit(
+                                      floorIndex,
+                                      hallIndex,
+                                      exhibitIndex,
+                                      "shortDesc",
+                                      value
+                                    )
+                                  }
+                                />
+                                <TextArea
+                                  label="Дэлгэрэнгүй тайлбар"
+                                  value={exhibit.desc}
+                                  onChange={(value) =>
+                                    updateExhibit(
+                                      floorIndex,
+                                      hallIndex,
+                                      exhibitIndex,
+                                      "desc",
+                                      value
+                                    )
+                                  }
+                                />
+                                <AdminQrSection
+                                  title={exhibit.title}
+                                  exhibitId={exhibit.id}
+                                  url={exhibitPublicUrl(
+                                    exhibit,
+                                    floorIndex,
+                                    hallIndex,
+                                    exhibitIndex
+                                  )}
+                                />
+                                <MediaEditor
+                                  title="Үзмэрийн медиа"
+                                  scope="exhibit"
+                                  indexes={[
+                                    floorIndex,
+                                    hallIndex,
+                                    exhibitIndex,
+                                  ]}
+                                  item={exhibit}
+                                  uploadMedia={uploadExhibitMedia}
+                                  deleteMedia={deleteMedia}
+                                  addUrlMedia={addUrlMedia}
+                                  sidePhotos
+                                />
                               </div>
-                              <div className="formGrid">
-                                <TextField label="Үзмэр нэр" value={exhibit.title} onChange={(value) => updateExhibit(floorIndex, hallIndex, exhibitIndex, "title", value)} />
-                                <TextField label="Ангилал" value={exhibit.category} onChange={(value) => updateExhibit(floorIndex, hallIndex, exhibitIndex, "category", value)} />
-                                <TextField label="Он цаг" value={exhibit.period} onChange={(value) => updateExhibit(floorIndex, hallIndex, exhibitIndex, "period", value)} />
-                                <TextField label="Материал" value={exhibit.material} onChange={(value) => updateExhibit(floorIndex, hallIndex, exhibitIndex, "material", value)} />
-                                <TextField label="Олдсон газар" value={exhibit.foundPlace} onChange={(value) => updateExhibit(floorIndex, hallIndex, exhibitIndex, "foundPlace", value)} />
-                              </div>
-                              <TextArea label="Товч тайлбар" value={exhibit.shortDesc} onChange={(value) => updateExhibit(floorIndex, hallIndex, exhibitIndex, "shortDesc", value)} />
-                              <TextArea label="Дэлгэрэнгүй тайлбар" value={exhibit.desc} onChange={(value) => updateExhibit(floorIndex, hallIndex, exhibitIndex, "desc", value)} />
-                              <AdminQrSection
-                                title={exhibit.title}
-                                exhibitId={exhibit.id}
-                                url={exhibitPublicUrl(
-                                  exhibit,
-                                  floorIndex,
-                                  hallIndex,
-                                  exhibitIndex
-                                )}
-                              />
-                              <MediaEditor
-                                title="Үзмэрийн медиа"
-                                scope="exhibit"
-                                indexes={[floorIndex, hallIndex, exhibitIndex]}
-                                item={exhibit}
-                                uploadMedia={uploadExhibitMedia}
-                                deleteMedia={deleteMedia}
-                                addUrlMedia={addUrlMedia}
-                                sidePhotos
-                              />
-                            </div>
-                          ))}
+                            )
+                          )}
                         </div>
                       )}
                     </div>
@@ -4114,7 +4799,11 @@ function AdminPage(props) {
                         type="checkbox"
                         checked={pageData.published !== false}
                         onChange={(event) =>
-                          updateAboutPage(sectionKey, "published", event.target.checked)
+                          updateAboutPage(
+                            sectionKey,
+                            "published",
+                            event.target.checked
+                          )
                         }
                       />
                       Нийтлэх
@@ -4124,23 +4813,31 @@ function AdminPage(props) {
                     <TextField
                       label="Гарчиг"
                       value={pageData.title}
-                      onChange={(value) => updateAboutPage(sectionKey, "title", value)}
+                      onChange={(value) =>
+                        updateAboutPage(sectionKey, "title", value)
+                      }
                     />
                     <TextField
                       label="Дэд гарчиг"
                       value={pageData.subtitle}
-                      onChange={(value) => updateAboutPage(sectionKey, "subtitle", value)}
+                      onChange={(value) =>
+                        updateAboutPage(sectionKey, "subtitle", value)
+                      }
                     />
                     <TextField
                       label="Sort order"
                       type="number"
                       value={pageData.sortOrder}
-                      onChange={(value) => updateAboutPage(sectionKey, "sortOrder", value)}
+                      onChange={(value) =>
+                        updateAboutPage(sectionKey, "sortOrder", value)
+                      }
                     />
                     <TextField
                       label="Видео URL"
                       value={pageData.video}
-                      onChange={(value) => updateAboutPage(sectionKey, "video", value)}
+                      onChange={(value) =>
+                        updateAboutPage(sectionKey, "video", value)
+                      }
                     />
                   </div>
                   {sectionKey === "greeting" && (
@@ -4156,20 +4853,32 @@ function AdminPage(props) {
                         <TextField
                           label="Албан тушаал"
                           value={pageData.role}
-                          onChange={(value) => updateAboutPage(sectionKey, "role", value)}
+                          onChange={(value) =>
+                            updateAboutPage(sectionKey, "role", value)
+                          }
                         />
                       </div>
                       <UploadBox
                         title="Захирлын зураг"
                         accept="image/*"
-                        onUpload={(file) => uploadAboutDirectorImage(sectionKey, file)}
+                        onUpload={(file) =>
+                          uploadAboutDirectorImage(sectionKey, file)
+                        }
                         preview={pageData.image}
                       />
                     </>
                   )}
                   <TextArea
-                    label={sectionKey === "organization" ? "Байгууллагын тайлбар" : "Дэлгэрэнгүй текст"}
-                    value={sectionKey === "organization" ? pageData.description : pageData.body}
+                    label={
+                      sectionKey === "organization"
+                        ? "Байгууллагын тайлбар"
+                        : "Дэлгэрэнгүй текст"
+                    }
+                    value={
+                      sectionKey === "organization"
+                        ? pageData.description
+                        : pageData.body
+                    }
                     onChange={(value) =>
                       updateAboutPage(
                         sectionKey,
@@ -4186,7 +4895,10 @@ function AdminPage(props) {
                         updateAboutPage(
                           sectionKey,
                           "departments",
-                          value.split("\n").map((item) => item.trim()).filter(Boolean)
+                          value
+                            .split("\n")
+                            .map((item) => item.trim())
+                            .filter(Boolean)
                         )
                       }
                     />
@@ -4230,7 +4942,15 @@ function AdminPage(props) {
           <div className="adminBlock">
             <div className="adminBlockHead">
               <h2>Боловсролын ажил</h2>
-              <button className="primaryButton" onClick={() => addItem("educationPrograms", normalizeEducation({ title: "Шинэ хөтөлбөр" }))}>
+              <button
+                className="primaryButton"
+                onClick={() =>
+                  addItem(
+                    "educationPrograms",
+                    normalizeEducation({ title: "Шинэ хөтөлбөр" })
+                  )
+                }
+              >
                 <Plus size={18} />
                 Хөтөлбөр нэмэх
               </button>
@@ -4238,20 +4958,101 @@ function AdminPage(props) {
             {safeArray(data.educationPrograms).map((program, index) => (
               <div className="listEditor" key={`${program.title}-${index}`}>
                 <div className="formGrid">
-                  <TextField label="Гарчиг" value={program.title} onChange={(value) => updateItem("educationPrograms", index, "title", value)} />
-                  <TextField label="Ангилал" value={program.type} onChange={(value) => updateItem("educationPrograms", index, "type", value)} />
-                  <TextField label="Зорилтот бүлэг" value={program.audience} onChange={(value) => updateItem("educationPrograms", index, "audience", value)} />
+                  <TextField
+                    label="Гарчиг"
+                    value={program.title}
+                    onChange={(value) =>
+                      updateItem("educationPrograms", index, "title", value)
+                    }
+                  />
+                  <TextField
+                    label="Ангилал"
+                    value={program.type}
+                    onChange={(value) =>
+                      updateItem("educationPrograms", index, "type", value)
+                    }
+                  />
+                  <TextField
+                    label="Зорилтот бүлэг"
+                    value={program.audience}
+                    onChange={(value) =>
+                      updateItem("educationPrograms", index, "audience", value)
+                    }
+                  />
                 </div>
-                <TextArea label="Тайлбар" value={program.desc} onChange={(value) => updateItem("educationPrograms", index, "desc", value)} />
+                <TextArea
+                  label="Тайлбар"
+                  value={program.desc}
+                  onChange={(value) =>
+                    updateItem("educationPrograms", index, "desc", value)
+                  }
+                />
                 <div className="mediaAdminGrid">
-                  <UploadBox title="Сургалтын материал" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,image/*" multiple document onUpload={(files) => uploadEducationMedia(index, "resources", files, "raw")} />
-                  <UploadBox title="Сургалтын видео" accept="video/*" multiple video onUpload={(files) => uploadEducationMedia(index, "videos", files, "video")} />
+                  <UploadBox
+                    title="Сургалтын материал"
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,image/*"
+                    multiple
+                    document
+                    onUpload={(files) =>
+                      uploadEducationMedia(index, "resources", files, "raw")
+                    }
+                  />
+                  <UploadBox
+                    title="Сургалтын видео"
+                    accept="video/*"
+                    multiple
+                    video
+                    onUpload={(files) =>
+                      uploadEducationMedia(index, "videos", files, "video")
+                    }
+                  />
                 </div>
-                <MediaList items={program.resources} document onDelete={(i) => updateItem("educationPrograms", index, "resources", safeArray(program.resources).filter((_, n) => n !== i))} />
-                <UrlAdd label="Материал URL" onAdd={(url) => updateItem("educationPrograms", index, "resources", [...safeArray(program.resources), url])} />
-                <MediaList items={program.videos} video onDelete={(i) => updateItem("educationPrograms", index, "videos", safeArray(program.videos).filter((_, n) => n !== i))} />
-                <UrlAdd label="Видео URL" onAdd={(url) => updateItem("educationPrograms", index, "videos", [...safeArray(program.videos), url])} />
-                <button className="dangerButton" onClick={() => deleteItem("educationPrograms", index)}>
+                <MediaList
+                  items={program.resources}
+                  document
+                  onDelete={(i) =>
+                    updateItem(
+                      "educationPrograms",
+                      index,
+                      "resources",
+                      safeArray(program.resources).filter((_, n) => n !== i)
+                    )
+                  }
+                />
+                <UrlAdd
+                  label="Материал URL"
+                  onAdd={(url) =>
+                    updateItem("educationPrograms", index, "resources", [
+                      ...safeArray(program.resources),
+                      url,
+                    ])
+                  }
+                />
+                <MediaList
+                  items={program.videos}
+                  video
+                  onDelete={(i) =>
+                    updateItem(
+                      "educationPrograms",
+                      index,
+                      "videos",
+                      safeArray(program.videos).filter((_, n) => n !== i)
+                    )
+                  }
+                />
+                <UrlAdd
+                  label="Видео URL"
+                  onAdd={(url) =>
+                    updateItem("educationPrograms", index, "videos", [
+                      ...safeArray(program.videos),
+                      url,
+                    ])
+                  }
+                />
+                <button
+                  className="dangerButton"
+                  onClick={() => deleteItem("educationPrograms", index)}
+                >
                   <Trash2 size={17} />
                   Устгах
                 </button>
@@ -4293,24 +5094,83 @@ function AdminPage(props) {
                       type="checkbox"
                       checked={item.published !== false}
                       onChange={(event) =>
-                        updateItem("publications", index, "published", event.target.checked)
+                        updateItem(
+                          "publications",
+                          index,
+                          "published",
+                          event.target.checked
+                        )
                       }
                     />
                     Нийтлэх
                   </label>
                 </div>
                 <div className="formGrid">
-                  <TextField label="Гарчиг" value={item.title} onChange={(value) => updateItem("publications", index, "title", value)} />
-                  <TextField label="Он" value={item.year} onChange={(value) => updateItem("publications", index, "year", value)} />
-                  <TextField label="Зохиогч / редактор" value={item.author} onChange={(value) => updateItem("publications", index, "author", value)} />
-                  <TextField label="Ангилал" value={item.category} onChange={(value) => updateItem("publications", index, "category", value)} />
-                  <TextField label="Sort order" type="number" value={item.sortOrder} onChange={(value) => updateItem("publications", index, "sortOrder", value)} />
+                  <TextField
+                    label="Гарчиг"
+                    value={item.title}
+                    onChange={(value) =>
+                      updateItem("publications", index, "title", value)
+                    }
+                  />
+                  <TextField
+                    label="Он"
+                    value={item.year}
+                    onChange={(value) =>
+                      updateItem("publications", index, "year", value)
+                    }
+                  />
+                  <TextField
+                    label="Зохиогч / редактор"
+                    value={item.author}
+                    onChange={(value) =>
+                      updateItem("publications", index, "author", value)
+                    }
+                  />
+                  <TextField
+                    label="Ангилал"
+                    value={item.category}
+                    onChange={(value) =>
+                      updateItem("publications", index, "category", value)
+                    }
+                  />
+                  <TextField
+                    label="Sort order"
+                    type="number"
+                    value={item.sortOrder}
+                    onChange={(value) =>
+                      updateItem("publications", index, "sortOrder", value)
+                    }
+                  />
                 </div>
-                <TextArea label="Товч тайлбар" value={item.desc} onChange={(value) => updateItem("publications", index, "desc", value)} />
-                <TextArea label="Дэлгэрэнгүй тайлбар" value={item.fullDesc} onChange={(value) => updateItem("publications", index, "fullDesc", value)} />
+                <TextArea
+                  label="Товч тайлбар"
+                  value={item.desc}
+                  onChange={(value) =>
+                    updateItem("publications", index, "desc", value)
+                  }
+                />
+                <TextArea
+                  label="Дэлгэрэнгүй тайлбар"
+                  value={item.fullDesc}
+                  onChange={(value) =>
+                    updateItem("publications", index, "fullDesc", value)
+                  }
+                />
                 <div className="mediaAdminGrid">
-                  <UploadBox title="Cover image" accept="image/*" onUpload={(file) => uploadPublicationCover(index, file)} preview={item.coverImage} />
-                  <UploadBox title="PDF / DOCX / ZIP / зураг" accept=".pdf,.doc,.docx,.zip,image/*" multiple document onUpload={(files) => uploadPublicationFiles(index, files)} />
+                  <UploadBox
+                    title="Cover image"
+                    accept="image/*"
+                    onUpload={(file) => uploadPublicationCover(index, file)}
+                    preview={item.coverImage}
+                  />
+                  <UploadBox
+                    title="PDF / DOCX / ZIP / зураг"
+                    accept=".pdf,.doc,.docx,.zip,image/*"
+                    multiple
+                    document
+                    onUpload={(files) => uploadPublicationFiles(index, files)}
+                  />
                 </div>
                 <MediaList
                   items={safeArray(item.files).map((file) => file.url || file)}
@@ -4333,7 +5193,10 @@ function AdminPage(props) {
                     ])
                   }
                 />
-                <button className="dangerButton" onClick={() => deleteItem("publications", index)}>
+                <button
+                  className="dangerButton"
+                  onClick={() => deleteItem("publications", index)}
+                >
                   <Trash2 size={17} />
                   Устгах
                 </button>
@@ -4374,21 +5237,70 @@ function AdminPage(props) {
                       type="checkbox"
                       checked={item.published !== false}
                       onChange={(event) =>
-                        updateItem("transparency", index, "published", event.target.checked)
+                        updateItem(
+                          "transparency",
+                          index,
+                          "published",
+                          event.target.checked
+                        )
                       }
                     />
                     Нийтлэх
                   </label>
                 </div>
                 <div className="formGrid">
-                  <TextField label="Гарчиг" value={item.title} onChange={(value) => updateItem("transparency", index, "title", value)} />
-                  <TextField label="Огноо" type="date" value={item.date} onChange={(value) => updateItem("transparency", index, "date", value)} />
-                  <TextField label="Ангилал" value={item.category} onChange={(value) => updateItem("transparency", index, "category", value)} />
-                  <TextField label="Sort order" type="number" value={item.sortOrder} onChange={(value) => updateItem("transparency", index, "sortOrder", value)} />
-                  <TextField label="Үндсэн файл URL" value={item.fileUrl} onChange={(value) => updateItem("transparency", index, "fileUrl", value)} />
+                  <TextField
+                    label="Гарчиг"
+                    value={item.title}
+                    onChange={(value) =>
+                      updateItem("transparency", index, "title", value)
+                    }
+                  />
+                  <TextField
+                    label="Огноо"
+                    type="date"
+                    value={item.date}
+                    onChange={(value) =>
+                      updateItem("transparency", index, "date", value)
+                    }
+                  />
+                  <TextField
+                    label="Ангилал"
+                    value={item.category}
+                    onChange={(value) =>
+                      updateItem("transparency", index, "category", value)
+                    }
+                  />
+                  <TextField
+                    label="Sort order"
+                    type="number"
+                    value={item.sortOrder}
+                    onChange={(value) =>
+                      updateItem("transparency", index, "sortOrder", value)
+                    }
+                  />
+                  <TextField
+                    label="Үндсэн файл URL"
+                    value={item.fileUrl}
+                    onChange={(value) =>
+                      updateItem("transparency", index, "fileUrl", value)
+                    }
+                  />
                 </div>
-                <TextArea label="Тайлбар" value={item.desc} onChange={(value) => updateItem("transparency", index, "desc", value)} />
-                <UploadBox title="Тайлан / санхүү / зарын файл" accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,image/*" multiple document onUpload={(files) => uploadTransparencyFiles(index, files)} />
+                <TextArea
+                  label="Тайлбар"
+                  value={item.desc}
+                  onChange={(value) =>
+                    updateItem("transparency", index, "desc", value)
+                  }
+                />
+                <UploadBox
+                  title="Тайлан / санхүү / зарын файл"
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,image/*"
+                  multiple
+                  document
+                  onUpload={(files) => uploadTransparencyFiles(index, files)}
+                />
                 <MediaList
                   items={safeArray(item.files).map((file) => file.url || file)}
                   document
@@ -4410,7 +5322,10 @@ function AdminPage(props) {
                     ])
                   }
                 />
-                <button className="dangerButton" onClick={() => deleteItem("transparency", index)}>
+                <button
+                  className="dangerButton"
+                  onClick={() => deleteItem("transparency", index)}
+                >
                   <Trash2 size={17} />
                   Устгах
                 </button>
@@ -4447,18 +5362,24 @@ function AdminPage(props) {
                   <TextField
                     label="Он / огноо"
                     value={slide.year}
-                    onChange={(value) => updateItem("timelineSlides", index, "year", value)}
+                    onChange={(value) =>
+                      updateItem("timelineSlides", index, "year", value)
+                    }
                   />
                   <TextField
                     label="Гарчиг"
                     value={slide.title}
-                    onChange={(value) => updateItem("timelineSlides", index, "title", value)}
+                    onChange={(value) =>
+                      updateItem("timelineSlides", index, "title", value)
+                    }
                   />
                 </div>
                 <TextArea
                   label="Тайлбар"
                   value={slide.desc}
-                  onChange={(value) => updateItem("timelineSlides", index, "desc", value)}
+                  onChange={(value) =>
+                    updateItem("timelineSlides", index, "desc", value)
+                  }
                 />
                 <UploadBox
                   title="Слайдын зураг"
@@ -4469,9 +5390,14 @@ function AdminPage(props) {
                 <TextField
                   label="Зураг URL"
                   value={slide.image}
-                  onChange={(value) => updateItem("timelineSlides", index, "image", value)}
+                  onChange={(value) =>
+                    updateItem("timelineSlides", index, "image", value)
+                  }
                 />
-                <button className="dangerButton" onClick={() => deleteItem("timelineSlides", index)}>
+                <button
+                  className="dangerButton"
+                  onClick={() => deleteItem("timelineSlides", index)}
+                >
                   <Trash2 size={17} />
                   Слайд устгах
                 </button>
@@ -4510,7 +5436,9 @@ function AdminPage(props) {
               <TextArea
                 label="Open Graph description"
                 value={data.seo.ogDescription}
-                onChange={(value) => updateNested("seo", "ogDescription", value)}
+                onChange={(value) =>
+                  updateNested("seo", "ogDescription", value)
+                }
               />
               <UploadBox
                 title="Social preview зураг"
@@ -4531,7 +5459,15 @@ function AdminPage(props) {
           <div className="adminBlock">
             <div className="adminBlockHead">
               <h2>VR/AR үзмэр медиа</h2>
-              <button className="primaryButton" onClick={() => addItem("arVrItems", normalizeArVr({ title: "Шинэ VR/AR үзмэр" }))}>
+              <button
+                className="primaryButton"
+                onClick={() =>
+                  addItem(
+                    "arVrItems",
+                    normalizeArVr({ title: "Шинэ VR/AR үзмэр" })
+                  )
+                }
+              >
                 <Plus size={18} />
                 Үзмэр нэмэх
               </button>
@@ -4539,18 +5475,72 @@ function AdminPage(props) {
             {safeArray(data.arVrItems).map((item, index) => (
               <div className="listEditor" key={`${item.title}-${index}`}>
                 <div className="formGrid">
-                  <TextField label="Гарчиг" value={item.title} onChange={(value) => updateItem("arVrItems", index, "title", value)} />
-                  <TextField label="Төрөл" value={item.type} onChange={(value) => updateItem("arVrItems", index, "type", value)} />
+                  <TextField
+                    label="Гарчиг"
+                    value={item.title}
+                    onChange={(value) =>
+                      updateItem("arVrItems", index, "title", value)
+                    }
+                  />
+                  <TextField
+                    label="Төрөл"
+                    value={item.type}
+                    onChange={(value) =>
+                      updateItem("arVrItems", index, "type", value)
+                    }
+                  />
                 </div>
-                <TextArea label="Тайлбар" value={item.desc} onChange={(value) => updateItem("arVrItems", index, "desc", value)} />
-                <TextField label="360 зураг / 360 видео / VR/AR / YouTube / Cloudinary URL" value={item.url} onChange={(value) => updateItem("arVrItems", index, "url", value)} />
-                <TextField label="Fallback video URL" value={item.fallbackVideo} onChange={(value) => updateItem("arVrItems", index, "fallbackVideo", value)} />
+                <TextArea
+                  label="Тайлбар"
+                  value={item.desc}
+                  onChange={(value) =>
+                    updateItem("arVrItems", index, "desc", value)
+                  }
+                />
+                <TextField
+                  label="360 зураг / 360 видео / VR/AR / YouTube / Cloudinary URL"
+                  value={item.url}
+                  onChange={(value) =>
+                    updateItem("arVrItems", index, "url", value)
+                  }
+                />
+                <TextField
+                  label="Fallback video URL"
+                  value={item.fallbackVideo}
+                  onChange={(value) =>
+                    updateItem("arVrItems", index, "fallbackVideo", value)
+                  }
+                />
                 <div className="mediaAdminGrid three">
-                  <UploadBox title="Thumbnail зураг" accept="image/*" onUpload={(file) => uploadArVrMedia(index, "thumbnail", file, "image")} preview={item.thumbnail} />
-                  <UploadBox title="360/VR видео" accept="video/*" onUpload={(file) => uploadArVrMedia(index, "url", file, "video")} video />
-                  <UploadBox title="AR model/document" accept=".glb,.gltf,.usdz,.obj,.fbx,.zip,.pdf" onUpload={(file) => uploadArVrMedia(index, "url", file, "raw")} document />
+                  <UploadBox
+                    title="Thumbnail зураг"
+                    accept="image/*"
+                    onUpload={(file) =>
+                      uploadArVrMedia(index, "thumbnail", file, "image")
+                    }
+                    preview={item.thumbnail}
+                  />
+                  <UploadBox
+                    title="360/VR видео"
+                    accept="video/*"
+                    onUpload={(file) =>
+                      uploadArVrMedia(index, "url", file, "video")
+                    }
+                    video
+                  />
+                  <UploadBox
+                    title="AR model/document"
+                    accept=".glb,.gltf,.usdz,.obj,.fbx,.zip,.pdf"
+                    onUpload={(file) =>
+                      uploadArVrMedia(index, "url", file, "raw")
+                    }
+                    document
+                  />
                 </div>
-                <button className="dangerButton" onClick={() => deleteItem("arVrItems", index)}>
+                <button
+                  className="dangerButton"
+                  onClick={() => deleteItem("arVrItems", index)}
+                >
                   <Trash2 size={17} />
                   Устгах
                 </button>
@@ -4563,17 +5553,44 @@ function AdminPage(props) {
           <div className="adminBlock">
             <div className="adminBlockHead">
               <h2>Мэдээ</h2>
-              <button className="primaryButton" onClick={() => addItem("news", { title: "Шинэ мэдээ", desc: "", date: new Date().toISOString().slice(0, 10) })}>
+              <button
+                className="primaryButton"
+                onClick={() =>
+                  addItem("news", {
+                    title: "Шинэ мэдээ",
+                    desc: "",
+                    date: new Date().toISOString().slice(0, 10),
+                  })
+                }
+              >
                 <Plus size={18} />
                 Мэдээ нэмэх
               </button>
             </div>
             {safeArray(data.news).map((item, index) => (
               <div className="listEditor" key={`${item.title}-${index}`}>
-                <TextField label="Гарчиг" value={item.title} onChange={(value) => updateItem("news", index, "title", value)} />
-                <TextField label="Огноо" type="date" value={item.date} onChange={(value) => updateItem("news", index, "date", value)} />
-                <TextArea label="Тайлбар" value={item.desc} onChange={(value) => updateItem("news", index, "desc", value)} />
-                <button className="dangerButton" onClick={() => deleteItem("news", index)}>
+                <TextField
+                  label="Гарчиг"
+                  value={item.title}
+                  onChange={(value) =>
+                    updateItem("news", index, "title", value)
+                  }
+                />
+                <TextField
+                  label="Огноо"
+                  type="date"
+                  value={item.date}
+                  onChange={(value) => updateItem("news", index, "date", value)}
+                />
+                <TextArea
+                  label="Тайлбар"
+                  value={item.desc}
+                  onChange={(value) => updateItem("news", index, "desc", value)}
+                />
+                <button
+                  className="dangerButton"
+                  onClick={() => deleteItem("news", index)}
+                >
                   <Trash2 size={17} />
                   Устгах
                 </button>
@@ -4590,14 +5607,23 @@ function AdminPage(props) {
                   <span className="sectionKicker">QPay-ready checkout</span>
                   <h2>Тасалбар ба төлбөр</h2>
                 </div>
-                <button className="primaryButton" onClick={() => exportOrdersCsv(ticketOrders)}>
+                <button
+                  className="primaryButton"
+                  onClick={() => exportOrdersCsv(ticketOrders)}
+                >
                   <Download size={18} />
                   CSV экспорт
                 </button>
               </div>
 
               <div className="paymentModeGrid">
-                <label className={data.paymentSettings.mode === "demo" ? "modeCard active" : "modeCard"}>
+                <label
+                  className={
+                    data.paymentSettings.mode === "demo"
+                      ? "modeCard active"
+                      : "modeCard"
+                  }
+                >
                   <input
                     type="radio"
                     name="paymentMode"
@@ -4605,9 +5631,18 @@ function AdminPage(props) {
                     onChange={() => updatePaymentMode("demo")}
                   />
                   <span>Demo mode</span>
-                  <p>Бодит QPay credential шаардахгүй. QR үзүүлж, admin эсвэл тест товчоор төлөгдсөн болгоно.</p>
+                  <p>
+                    Бодит QPay credential шаардахгүй. QR үзүүлж, admin эсвэл
+                    тест товчоор төлөгдсөн болгоно.
+                  </p>
                 </label>
-                <label className={data.paymentSettings.mode === "live" ? "modeCard active" : "modeCard"}>
+                <label
+                  className={
+                    data.paymentSettings.mode === "live"
+                      ? "modeCard active"
+                      : "modeCard"
+                  }
+                >
                   <input
                     type="radio"
                     name="paymentMode"
@@ -4615,7 +5650,11 @@ function AdminPage(props) {
                     onChange={() => updatePaymentMode("live")}
                   />
                   <span>QPay Live</span>
-                  <p>Backend/serverless endpoint болон merchant env credentials холбосны дараа идэвхжинэ. Нууц мэдээлэл frontend-д хадгалахгүй.</p>
+                  <p>
+                    Backend/serverless endpoint болон merchant env credentials
+                    холбосны дараа идэвхжинэ. Нууц мэдээлэл frontend-д
+                    хадгалахгүй.
+                  </p>
                 </label>
               </div>
 
@@ -4632,20 +5671,29 @@ function AdminPage(props) {
                     <TextField
                       label="Нэр"
                       value={ticketType.name}
-                      onChange={(value) => updateTicketTypeSetting(index, "name", value)}
+                      onChange={(value) =>
+                        updateTicketTypeSetting(index, "name", value)
+                      }
                     />
                     <TextField
                       label="Үнэ (MNT)"
                       type="number"
                       value={ticketType.price}
-                      onChange={(value) => updateTicketTypeSetting(index, "price", value)}
+                      onChange={(value) =>
+                        updateTicketTypeSetting(index, "price", value)
+                      }
                     />
                     <TextField
                       label="Тайлбар"
                       value={ticketType.description}
-                      onChange={(value) => updateTicketTypeSetting(index, "description", value)}
+                      onChange={(value) =>
+                        updateTicketTypeSetting(index, "description", value)
+                      }
                     />
-                    <button className="dangerMini" onClick={() => deleteTicketTypeSetting(index)}>
+                    <button
+                      className="dangerMini"
+                      onClick={() => deleteTicketTypeSetting(index)}
+                    >
                       <Trash2 size={16} />
                     </button>
                   </div>
@@ -4660,31 +5708,50 @@ function AdminPage(props) {
                     <span className="sectionKicker">New ticket request</span>
                     <h2>Мэдэгдэл</h2>
                   </div>
-                  <button className="ghostButton" onClick={requestBrowserNotifications}>
+                  <button
+                    className="ghostButton"
+                    onClick={requestBrowserNotifications}
+                  >
                     <Bell size={17} />
-                    {browserNotifyEnabled ? "Browser notification идэвхтэй" : "Browser notification асаах"}
+                    {browserNotifyEnabled
+                      ? "Browser notification идэвхтэй"
+                      : "Browser notification асаах"}
                   </button>
                 </div>
                 <div className="notificationList">
                   {ticketNotifications.length ? (
                     ticketNotifications.slice(0, 8).map((notification) => (
                       <article
-                        className={notification.read ? "notificationCard" : "notificationCard unread"}
+                        className={
+                          notification.read
+                            ? "notificationCard"
+                            : "notificationCard unread"
+                        }
                         key={notification.id}
                       >
                         <div>
                           <strong>{notification.title}</strong>
                           <span>
-                            {notification.customerName} • {notification.ticketType} • {notification.quantity}ш
+                            {notification.customerName} •{" "}
+                            {notification.ticketType} • {notification.quantity}ш
                           </span>
                           <p>
-                            {notification.contact} • {Number(notification.totalAmount || 0).toLocaleString()} MNT •{" "}
+                            {notification.contact} •{" "}
+                            {Number(
+                              notification.totalAmount || 0
+                            ).toLocaleString()}{" "}
+                            MNT •{" "}
                             {paymentStatusLabel(notification.paymentStatus)}
                           </p>
                           <time>{formatDate(notification.createdAt)}</time>
                         </div>
                         {!notification.read && (
-                          <button className="ghostButton" onClick={() => markNotificationRead(notification.id)}>
+                          <button
+                            className="ghostButton"
+                            onClick={() =>
+                              markNotificationRead(notification.id)
+                            }
+                          >
                             Уншсан
                           </button>
                         )}
@@ -4701,20 +5768,50 @@ function AdminPage(props) {
                 <div className="statusGrid">
                   <Status
                     label="Хүлээгдэж буй"
-                    value={ticketOrders.filter((order) => paymentStatusKey(order.paymentStatus || order.status) === "pending").length}
+                    value={
+                      ticketOrders.filter(
+                        (order) =>
+                          paymentStatusKey(
+                            order.paymentStatus || order.status
+                          ) === "pending"
+                      ).length
+                    }
                   />
                   <Status
                     label="Төлөгдсөн"
-                    value={ticketOrders.filter((order) => paymentStatusKey(order.paymentStatus || order.status) === "paid").length}
+                    value={
+                      ticketOrders.filter(
+                        (order) =>
+                          paymentStatusKey(
+                            order.paymentStatus || order.status
+                          ) === "paid"
+                      ).length
+                    }
                   />
                   <Status
                     label="Цуцалсан"
-                    value={ticketOrders.filter((order) => paymentStatusKey(order.paymentStatus || order.status) === "cancelled").length}
+                    value={
+                      ticketOrders.filter(
+                        (order) =>
+                          paymentStatusKey(
+                            order.paymentStatus || order.status
+                          ) === "cancelled"
+                      ).length
+                    }
                   />
-                  <Status label="Нийт дүн" value={`${ticketOrders.reduce((sum, order) => sum + Number(order.totalAmount || 0), 0).toLocaleString()} MNT`} />
+                  <Status
+                    label="Нийт дүн"
+                    value={`${ticketOrders
+                      .reduce(
+                        (sum, order) => sum + Number(order.totalAmount || 0),
+                        0
+                      )
+                      .toLocaleString()} MNT`}
+                  />
                 </div>
                 <p className="adminHint">
-                  QPay Live горимд бодит invoice, payment check, webhook нь backend/serverless function дээр хэрэгжинэ.
+                  QPay Live горимд бодит invoice, payment check, webhook нь
+                  backend/serverless function дээр хэрэгжинэ.
                 </p>
               </div>
             </div>
@@ -4750,31 +5847,56 @@ function AdminPage(props) {
                       <div>
                         <strong>{request.name || "Нэргүй захиалагч"}</strong>
                         <span>
-                          {request.ticketType} • {request.quantity || request.guests}ш •{" "}
-                          {Number(request.totalAmount || 0).toLocaleString()} {request.currency || "MNT"}
+                          {request.ticketType} •{" "}
+                          {request.quantity || request.guests}ш •{" "}
+                          {Number(request.totalAmount || 0).toLocaleString()}{" "}
+                          {request.currency || "MNT"}
                         </span>
                         <p>
-                          {request.phone || "утасгүй"} {request.email ? `• ${request.email}` : ""} •{" "}
+                          {request.phone || "утасгүй"}{" "}
+                          {request.email ? `• ${request.email}` : ""} •{" "}
                           {request.date || "огноо сонгоогүй"}
                         </p>
                         <em>
-                          ID: {request.id} • {request.source === "local" ? "localStorage fallback" : "Firebase/local sync"} •{" "}
-                          {paymentStatusLabel(request.paymentStatus || request.status)}
+                          ID: {request.id} •{" "}
+                          {request.source === "local"
+                            ? "localStorage fallback"
+                            : "Firebase/local sync"}{" "}
+                          •{" "}
+                          {paymentStatusLabel(
+                            request.paymentStatus || request.status
+                          )}
                         </em>
                         {request.note && <em>{request.note}</em>}
                       </div>
                       <div className="requestActions">
-                        <span className={`statusPill ${paymentStatusKey(request.paymentStatus || request.status)}`}>
-                          {paymentStatusLabel(request.paymentStatus || request.status)}
+                        <span
+                          className={`statusPill ${paymentStatusKey(
+                            request.paymentStatus || request.status
+                          )}`}
+                        >
+                          {paymentStatusLabel(
+                            request.paymentStatus || request.status
+                          )}
                         </span>
-                        {paymentStatusKey(request.paymentStatus || request.status) !== "paid" && (
-                          <button className="primaryButton" onClick={() => markTicketPaid(request.id)}>
+                        {paymentStatusKey(
+                          request.paymentStatus || request.status
+                        ) !== "paid" && (
+                          <button
+                            className="primaryButton"
+                            onClick={() => markTicketPaid(request.id)}
+                          >
                             <CheckCircle2 size={17} />
                             Төлөгдсөн
                           </button>
                         )}
-                        {paymentStatusKey(request.paymentStatus || request.status) !== "cancelled" && (
-                          <button className="ghostButton" onClick={() => cancelTicketOrder(request.id)}>
+                        {paymentStatusKey(
+                          request.paymentStatus || request.status
+                        ) !== "cancelled" && (
+                          <button
+                            className="ghostButton"
+                            onClick={() => cancelTicketOrder(request.id)}
+                          >
                             Цуцлах
                           </button>
                         )}
@@ -4783,7 +5905,9 @@ function AdminPage(props) {
                           onClick={() =>
                             deleteItem(
                               "ticketRequests",
-                              ticketOrders.findIndex((order) => order.id === request.id)
+                              ticketOrders.findIndex(
+                                (order) => order.id === request.id
+                              )
                             )
                           }
                         >
@@ -4804,7 +5928,8 @@ function AdminPage(props) {
           <div className="adminBlock">
             <h2>Media library</h2>
             <p className="adminHint">
-              Танхим, үзмэр, боловсрол, ном хэвлэл, ил тод байдал, VR/AR хэсэгт ашиглаж буй бүх медиа холбоос.
+              Танхим, үзмэр, боловсрол, ном хэвлэл, ил тод байдал, VR/AR хэсэгт
+              ашиглаж буй бүх медиа холбоос.
             </p>
             <MediaLibrary data={data} />
           </div>
@@ -4846,19 +5971,50 @@ function MediaEditor({
 }) {
   const upload = (field, type) => (files) =>
     uploadMedia(...indexes, field, files, type);
-  const remove = (field) => (index) => deleteMedia(scope, indexes, field, index);
+  const remove = (field) => (index) =>
+    deleteMedia(scope, indexes, field, index);
   const addUrl = (field) => (url) => addUrlMedia(scope, indexes, field, url);
 
   return (
     <div className="mediaEditorBlock">
       <h3>{title}</h3>
       <div className="mediaAdminGrid three">
-        <UploadBox title="Зураг" accept="image/*" multiple preview={item.images?.[0]} onUpload={upload("images", "image")} />
-        <UploadBox title="Видео" accept="video/*" multiple video onUpload={upload("videos", "video")} />
-        <UploadBox title="Аудио" accept="audio/*" multiple audio onUpload={upload("audios", "video")} />
-        <UploadBox title="Баримт бичиг" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,image/*" multiple document onUpload={upload("documents", "raw")} />
+        <UploadBox
+          title="Зураг"
+          accept="image/*"
+          multiple
+          preview={item.images?.[0]}
+          onUpload={upload("images", "image")}
+        />
+        <UploadBox
+          title="Видео"
+          accept="video/*"
+          multiple
+          video
+          onUpload={upload("videos", "video")}
+        />
+        <UploadBox
+          title="Аудио"
+          accept="audio/*"
+          multiple
+          audio
+          onUpload={upload("audios", "video")}
+        />
+        <UploadBox
+          title="Баримт бичиг"
+          accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,image/*"
+          multiple
+          document
+          onUpload={upload("documents", "raw")}
+        />
         {sidePhotos && (
-          <UploadBox title="4 талын зураг" accept="image/*" multiple preview={item.sidePhotos?.[0]} onUpload={upload("sidePhotos", "image")} />
+          <UploadBox
+            title="4 талын зураг"
+            accept="image/*"
+            multiple
+            preview={item.sidePhotos?.[0]}
+            onUpload={upload("sidePhotos", "image")}
+          />
         )}
       </div>
       <MediaList items={item.images} onDelete={remove("images")} />
@@ -4873,7 +6029,11 @@ function MediaEditor({
       <UrlAdd label="Видео URL" onAdd={addUrl("videos")} />
       <MediaList items={item.audios} audio onDelete={remove("audios")} />
       <UrlAdd label="Аудио URL" onAdd={addUrl("audios")} />
-      <MediaList items={item.documents} document onDelete={remove("documents")} />
+      <MediaList
+        items={item.documents}
+        document
+        onDelete={remove("documents")}
+      />
       <UrlAdd label="Баримт бичиг URL" onAdd={addUrl("documents")} />
     </div>
   );
@@ -4918,10 +6078,16 @@ function collectMediaItems(data) {
     safeArray(page.images).forEach((url) => push(url, "image", page.title));
   });
 
-  safeArray(data.timelineSlides).forEach((slide) => push(slide.image, "image", slide.title));
+  safeArray(data.timelineSlides).forEach((slide) =>
+    push(slide.image, "image", slide.title)
+  );
   safeArray(data.educationPrograms).forEach((program) => {
-    safeArray(program.resources).forEach((url) => push(url, "document", program.title));
-    safeArray(program.videos).forEach((url) => push(url, "video", program.title));
+    safeArray(program.resources).forEach((url) =>
+      push(url, "document", program.title)
+    );
+    safeArray(program.videos).forEach((url) =>
+      push(url, "video", program.title)
+    );
   });
   safeArray(data.arVrItems).forEach((item) => {
     push(item.thumbnail, "image", item.title);
@@ -4930,29 +6096,42 @@ function collectMediaItems(data) {
   });
   safeArray(data.publications).forEach((item) => {
     push(item.coverImage, "image", item.title);
-    safeArray(item.files).forEach((file) => push(file.url || file, "document", item.title));
+    safeArray(item.files).forEach((file) =>
+      push(file.url || file, "document", item.title)
+    );
   });
   safeArray(data.transparency).forEach((item) => {
     push(item.fileUrl, "document", item.title);
-    safeArray(item.files).forEach((file) => push(file.url || file, "document", item.title));
+    safeArray(item.files).forEach((file) =>
+      push(file.url || file, "document", item.title)
+    );
   });
   safeArray(data.floors).forEach((floor) => {
     push(floor.image, "image", floor.title);
     safeArray(floor.videos).forEach((url) => push(url, "video", floor.title));
     safeArray(floor.halls).forEach((hall) => {
-      [...safeArray(hall.images), ...safeArray(hall.sidePhotos)].forEach((url) =>
-        push(url, "image", hall.title)
+      [...safeArray(hall.images), ...safeArray(hall.sidePhotos)].forEach(
+        (url) => push(url, "image", hall.title)
       );
       safeArray(hall.videos).forEach((url) => push(url, "video", hall.title));
       safeArray(hall.audios).forEach((url) => push(url, "audio", hall.title));
-      safeArray(hall.documents).forEach((url) => push(url, "document", hall.title));
+      safeArray(hall.documents).forEach((url) =>
+        push(url, "document", hall.title)
+      );
       safeArray(hall.exhibits).forEach((exhibit) => {
-        [...safeArray(exhibit.images), ...safeArray(exhibit.sidePhotos)].forEach((url) =>
-          push(url, "image", exhibit.title)
+        [
+          ...safeArray(exhibit.images),
+          ...safeArray(exhibit.sidePhotos),
+        ].forEach((url) => push(url, "image", exhibit.title));
+        safeArray(exhibit.videos).forEach((url) =>
+          push(url, "video", exhibit.title)
         );
-        safeArray(exhibit.videos).forEach((url) => push(url, "video", exhibit.title));
-        safeArray(exhibit.audios).forEach((url) => push(url, "audio", exhibit.title));
-        safeArray(exhibit.documents).forEach((url) => push(url, "document", exhibit.title));
+        safeArray(exhibit.audios).forEach((url) =>
+          push(url, "audio", exhibit.title)
+        );
+        safeArray(exhibit.documents).forEach((url) =>
+          push(url, "document", exhibit.title)
+        );
       });
     });
   });
@@ -4967,12 +6146,18 @@ function collectMediaItems(data) {
 
 function MediaLibrary({ data }) {
   const items = collectMediaItems(data);
-  if (!items.length) return <EmptyState title="Одоогоор медиа бүртгэгдээгүй байна." />;
+  if (!items.length)
+    return <EmptyState title="Одоогоор медиа бүртгэгдээгүй байна." />;
 
   return (
     <div className="mediaLibraryGrid">
       {items.map((item, index) => (
-        <a href={item.url} target="_blank" rel="noreferrer" key={`${item.url}-${index}`}>
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noreferrer"
+          key={`${item.url}-${index}`}
+        >
           {item.type === "image" ? (
             <img src={item.url} alt={item.owner} />
           ) : item.type === "video" ? (
@@ -5096,14 +6281,23 @@ function UrlAdd({ label, onAdd }) {
   );
 }
 
-function MediaList({ items, onDelete, video = false, audio = false, document = false }) {
+function MediaList({
+  items,
+  onDelete,
+  video = false,
+  audio = false,
+  document = false,
+}) {
   const list = safeArray(items);
   if (!list.length) return null;
 
   return (
     <div className="mediaList">
       {list.map((item, index) => (
-        <div className={document || audio ? "mediaChip fileChip" : "mediaChip"} key={`${item}-${index}`}>
+        <div
+          className={document || audio ? "mediaChip fileChip" : "mediaChip"}
+          key={`${item}-${index}`}
+        >
           {video ? (
             <video src={item} muted playsInline />
           ) : audio ? (

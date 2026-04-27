@@ -1,14 +1,18 @@
-export async function createQPayInvoice(order) {
+export async function createQPayInvoice(order = {}) {
+  const invoiceId = `DEMO-${Date.now()}`;
+  const amount = Number(order?.totalAmount || order?.amount || 0);
+
   return {
     success: true,
     mode: "demo",
-    invoiceId: `DEMO-${Date.now()}`,
+    invoiceId,
     qrText: JSON.stringify({
       type: "demo_qpay",
-      amount: order?.totalAmount || 0,
-      orderId: order?.id || Date.now()
+      amount,
+      orderId: order?.id || invoiceId,
     }),
-    message: "Demo QPay invoice created"
+    paymentUrl: "https://qpay.mn",
+    message: "Demo QPay invoice created",
   };
 }
 
@@ -17,7 +21,7 @@ export async function checkQPayPayment(invoiceId) {
     success: true,
     paid: false,
     invoiceId,
-    message: "Demo mode: payment is not automatically verified"
+    message: "Demo mode: payment is not automatically verified",
   };
 }
 
@@ -25,6 +29,6 @@ export async function handleQPayWebhook(payload) {
   return {
     success: true,
     received: true,
-    payload
+    payload,
   };
 }
